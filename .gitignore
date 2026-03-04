@@ -26,7 +26,7 @@ build/
 
 # Skills - 备份目录
 **/scripts.backup*/
-**/mycc.backup**
+**/mycc.backup*/
 
 # ====================================
 # MyCC 运行时文件（不应提交）
@@ -41,6 +41,8 @@ build/
 # tests 已纳入版本控制（开源仓需要）
 .claude/skills/mycc/start_backend_temp.bat
 .claude/skills/mycc/start_hidden_temp.vbs
+.claude/skills/dingtalk/scripts/config.json
+.claude/skills/dingtalk/scripts/owner.json
 
 # ====================================
 # 系统配置和状态文件（本地使用）

@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime
 
 # 路径配置 - 使用环境变量或相对路径
-BASE_DIR = Path(os.environ.get("CC_PROJECT_DIR", Path(__file__).parent.parent.parent.parent))
+BASE_DIR = Path(os.environ.get("CC_PROJECT_DIR", Path(__file__).parent.parent.parent.parent.parent))
 DASHBOARD_PATH = BASE_DIR / ".claude/DASHBOARD.md"
 
 

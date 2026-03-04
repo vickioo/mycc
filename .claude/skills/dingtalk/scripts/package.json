@@ -1,0 +1,16 @@
+{
+  "name": "dingtalk-bot",
+  "version": "1.0.0",
+  "description": "钉钉 Stream 机器人",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dingtalk-stream": "^2.1.4"
+  }
+}
