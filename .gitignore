@@ -1,0 +1,17 @@
+# Obsidian
+.obsidian/*.json
+.obsidian/workspace*
+.obsidian/graph.json
+.obsidian/command-palette.json
+.obsidian/starred.json
+.obsidian/hotkeys.json
+
+# Attachments
+99-attachments/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,4 @@
+- [🏠 首页](/)
+- [📊 系统状态](0-System/system-health-report.md)
+- [🔧 修复记录](scripts/FIXES-SUMMARY.md)
+- [📚 知识库说明](KNOWLEDGE-LAUNCH.md)
