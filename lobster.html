@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b6b">
+    <title>SJLL 龙虾 - 语音交互</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            color: white;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* Lobster Card */
+        .lobster-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .lobster-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .lobster-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        .lobster-desc {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        /* Status */
+        .status-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .status-item:last-child { border-bottom: none; }
+        .status-label { color: #666; }
+        .status-value {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .status-dot.online { background: #4ade80; }
+        .status-dot.offline { background: #f87171; }
+        .status-dot.connecting { background: #fbbf24; animation: pulse 1s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Actions */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .action-btn.primary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+        }
+        .action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+        }
+        .action-btn.secondary {
+            background: #f8f9fa;
+            color: #333;
+        }
+        .action-btn.secondary:hover {
+            background: #e0e0e0;
+        }
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Voice Demo */
+        .voice-demo {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        .voice-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .voice-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .voice-feature {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        .feature-icon { font-size: 2em; margin-bottom: 8px; }
+        .feature-name { font-size: 0.85em; color: #666; }
+        
+        /* Info Box */
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .info-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        .info-content {
+            font-size: 0.9em;
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🦞 SJLL 龙虾</h1>
+        <div class="header-actions">
+            <a href="/" class="header-btn">🏠 主页</a>
+            <a href="/chat" class="header-btn">💬 AI 对话</a>
+        </div>
+    </div>
+    
+    <!-- Main -->
+    <div class="main">
+        <div class="lobster-card">
+            <div class="lobster-icon">🦞</div>
+            <div class="lobster-title">SJLL 龙虾</div>
+            <div class="lobster-desc">
+                Surface 设备 · Windows 环境<br/>
+                语音交互 · Cherry Studio
+            </div>
+            
+            <!-- Status -->
+            <div class="status-box">
+                <div class="status-item">
+                    <span class="status-label">SSH 连接</span>
+                    <span class="status-value">
+                        <div class="status-dot connecting" id="sshStatus"></div>
+                        <span id="sshText">检查中...</span>
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">语音服务</span>
+                    <span class="status-value">
+                        <div class="status-dot offline" id="voiceStatus"></div>
+                        <span id="voiceText">待安装</span>
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">网关地址</span>
+                    <span class="status-value" style="color: #667eea;">
+                        sj-liuliang.local
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="action-buttons">
+                <a href="http://sj-liuliang.local" target="_blank" class="action-btn primary" id="connectBtn" disabled>
+                    🔗 连接到龙虾网关
+                </a>
+                <a href="/kb-docs" class="action-btn secondary">
+                    📚 查看文档
+                </a>
+                <button class="action-btn secondary" onclick="checkConnection()">
+                    🔄 刷新状态
+                </button>
+            </div>
+            
+            <!-- Voice Demo -->
+            <div class="voice-demo">
+                <div class="voice-title">🎤 语音交互功能</div>
+                <div class="voice-features">
+                    <div class="voice-feature">
+                        <div class="feature-icon">🎙️</div>
+                        <div class="feature-name">语音输入</div>
+                    </div>
+                    <div class="voice-feature">
+                        <div class="feature-icon">🔊</div>
+                        <div class="feature-name">语音回复</div>
+                    </div>
+                    <div class="voice-feature">
+                        <div class="feature-icon">💬</div>
+                        <div class="feature-name">实时对话</div>
+                    </div>
+                    <div class="voice-feature">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-name">AI 驱动</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Info -->
+            <div class="info-box">
+                <div class="info-title">📋 安装说明</div>
+                <div class="info-content">
+                    1. 微信文章中的语音交互方案需要 Surface 龙虾安装<br/>
+                    2. 需要配置 API Key (Azure Speech / Whisper)<br/>
+                    3. 安装完成后即可在此页面进行语音对话<br/>
+                    <br/>
+                    <strong>需要支持:</strong> 请提供微信文章具体内容或 API Key
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        AI Team Hub · SJLL 龙虾语音交互
+    </div>
+    
+    <script>
+        // Check SSH connection
+        async function checkConnection() {
+            const sshDot = document.getElementById('sshStatus');
+            const sshText = document.getElementById('sshText');
+            const connectBtn = document.getElementById('connectBtn');
+            
+            sshDot.className = 'status-dot connecting';
+            sshText.textContent = '检查中...';
+            
+            try {
+                const response = await fetch('/api/system-status');
+                const data = await response.json();
+                
+                if (data.agents && data.agents.sjll === 'online') {
+                    sshDot.className = 'status-dot online';
+                    sshText.textContent = '已连接';
+                    connectBtn.disabled = false;
+                    connectBtn.href = 'http://sj-liuliang.local';
+                } else {
+                    sshDot.className = 'status-dot offline';
+                    sshText.textContent = '未连接';
+                    connectBtn.disabled = true;
+                }
+            } catch (e) {
+                sshDot.className = 'status-dot offline';
+                sshText.textContent = '连接失败';
+                connectBtn.disabled = true;
+            }
+        }
+        
+        // Initialize
+        checkConnection();
+        
+        // Auto refresh every 10 seconds
+        setInterval(checkConnection, 10000);
+    </script>
+</body>
+</html>

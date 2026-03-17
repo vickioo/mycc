@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <title>离线 - AI Team Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        .icon { font-size: 5em; margin-bottom: 20px; }
+        h1 { font-size: 2em; margin-bottom: 15px; }
+        p { font-size: 1.1em; opacity: 0.9; margin-bottom: 30px; line-height: 1.6; }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .retry-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .retry-btn:hover { transform: scale(1.05); }
+        .home-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .queue-info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>离线模式</h1>
+        <p>当前无法连接到服务器<br/>请检查网络连接后重试</p>
+        
+        <div class="status">
+            <div class="status-item">
+                <span>连接状态</span>
+                <span id="connectionStatus">❌ 离线</span>
+            </div>
+            <div class="status-item">
+                <span>待发送消息</span>
+                <span id="pendingCount">0</span>
+            </div>
+        </div>
+        
+        <button class="retry-btn" onclick="retryConnection()">🔄 重试连接</button>
+        <br/>
+        <a href="/" class="home-btn">🏠 返回主页</a>
+        
+        <div class="queue-info" id="queueInfo" style="display: none;">
+            <strong>💡 提示：</strong>
+            <p style="margin-top: 10px; font-size: 0.85em; opacity: 0.9;">
+                离线期间的消息已保存到本地队列，网络恢复后将自动发送。
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        let retryCount = 0;
+        const MAX_RETRIES = 5;
+        
+        // 检查连接状态
+        function checkConnection() {
+            fetch('/api/health', { cache: 'no-cache' })
+                .then(r => {
+                    if (r.ok) {
+                        document.getElementById('connectionStatus').textContent = '✅ 在线';
+                        document.getElementById('connectionStatus').style.color = '#4ade80';
+                        
+                        // 有 pending 消息，触发同步
+                        const pending = localStorage.getItem('pending-messages');
+                        if (pending && JSON.parse(pending).length > 0) {
+                            if ('serviceWorker' in navigator && 'sync' in registration) {
+                                registration.sync.register('sync-messages');
+                            }
+                        }
+                        
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 2000);
+                    }
+                })
+                .catch(() => {
+                    retryCount++;
+                    if (retryCount >= MAX_RETRIES) {
+                        document.getElementById('retryBtn').disabled = true;
+                        document.getElementById('retryBtn').textContent = '已达最大重试次数';
+                    }
+                });
+        }
+        
+        // 重试连接
+        function retryConnection() {
+            document.getElementById('retryBtn').textContent = '连接中...';
+            document.getElementById('retryBtn').disabled = true;
+            checkConnection();
+        }
+        
+        // 更新待发送计数
+        function updatePendingCount() {
+            const pending = localStorage.getItem('pending-messages');
+            const count = pending ? JSON.parse(pending).length : 0;
+            document.getElementById('pendingCount').textContent = count;
+            
+            if (count > 0) {
+                document.getElementById('queueInfo').style.display = 'block';
+            }
+        }
+        
+        // 初始化
+        updatePendingCount();
+        checkConnection();
+        
+        // 定期重试
+        setInterval(checkConnection, 10000);
+        
+        // Service Worker 注册
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => {
+                    console.log('SW registered:', reg);
+                })
+                .catch(err => {
+                    console.log('SW registration failed:', err);
+                });
+        }
+    </script>
+</body>
+</html>

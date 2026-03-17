@@ -19,12 +19,18 @@
 - Has Clash VPN service for internet access
 - Exit IP: 113.57.105.174
 
-**CC Clash Tunnel**:
+**CC Clash Tunnel** ⏸ 已停止:
 - Script: `/root/cc-clash-tunnel.sh`
 - PM2: `cc-clash-tunnel`, `cc-clash-watchdog` (health check every 30s)
 - Forwards CC server's Clash SOCKS5 (port 7890) to localhost:7890
 - Auto-proxy: `/root/auto-proxy.sh` in `.bashrc` - transparent proxy detection
 - Usage: `export ALL_PROXY=socks5h://localhost:7890` (or auto-detected)
+- **状态**: 2026-03-16 手动停止，可通过 `pm2 start cc-clash-tunnel` 重启
+
+**通知系统**:
+- 钉钉: `node /root/air/qwq/scripts/dingtalk-notify.js "标题" "内容" "info"`
+- 5min-report: PM2 服务 `/root/air/qwq/scripts/5min-report.sh`
+- 定期同步: 参考 [ai-skills-notify.md](./0-System/ai-skills-notify.md)
 
 **Agent Communication**:
 - qwq ↔ mycc: Local file sync via `shared-tasks/`
