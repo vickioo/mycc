@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内网集成主页 - AI Team</title>
+    <meta name="theme-color" content="#6366f1">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .sidebar-close:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(99,102,241,0.2), transparent);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .badge-new { background: var(--primary); color: white; }
+        .badge-hot { background: var(--danger); color: white; }
+        .badge-updated { background: var(--warning); color: black; }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s;
+            min-height: 100vh;
+        }
+
+        .main-content.sidebar-open {
+            margin-left: var(--sidebar-width);
+        }
+
+        /* Header */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(15,23,42,0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .menu-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg-hover);
+            border-color: var(--primary);
+        }
+
+        .page-title {
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .top-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Content */
+        .content {
+            padding: 25px;
+        }
+
+        /* Service Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(99,102,241,0.2);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .service-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-online { background: rgba(16,185,129,0.2); color: var(--success); }
+        .status-offline { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .status-warning { background: rgba(245,158,11,0.2); color: var(--warning); }
+
+        .service-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .service-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 260px;
+            }
+            .main-content.sidebar-open {
+                margin-left: 0;
+            }
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">🚀 AI Team Hub</span>
+            <button class="sidebar-close" onclick="toggleSidebar()">×</button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">核心服务</div>
+                <a href="#ai-assistants" class="nav-item active" onclick="navigate(event, 'ai-assistants')">
+                    <span class="nav-icon">🤖</span>
+                    <span>AI 助手团队</span>
+                    <span class="nav-badge badge-hot">3</span>
+                </a>
+                <a href="#knowledge" class="nav-item" onclick="navigate(event, 'knowledge')">
+                    <span class="nav-icon">📚</span>
+                    <span>知识库</span>
+                </a>
+                <a href="#mobile" class="nav-item" onclick="navigate(event, 'mobile')">
+                    <span class="nav-icon">📱</span>
+                    <span>移动端</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">内网服务</div>
+                <a href="#clash" class="nav-item" onclick="navigate(event, 'clash')">
+                    <span class="nav-icon">🌐</span>
+                    <span>Clash 代理</span>
+                    <span class="nav-badge badge-new">CC</span>
+                </a>
+                <a href="#oneapi" class="nav-item" onclick="navigate(event, 'oneapi')">
+                    <span class="nav-icon">🔗</span>
+                    <span>One-API</span>
+                </a>
+                <a href="#antigravity" class="nav-item" onclick="navigate(event, 'antigravity')">
+                    <span class="nav-icon">⚡</span>
+                    <span>Antigravity</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">远程连接</div>
+                <a href="#cc-server" class="nav-item" onclick="navigate(event, 'cc-server')">
+                    <span class="nav-icon">🖥️</span>
+                    <span>CC 服务器</span>
+                </a>
+                <a href="#gate" class="nav-item" onclick="navigate(event, 'gate')">
+                    <span class="nav-icon">🚪</span>
+                    <span>Gate 跳板</span>
+                    <span class="nav-badge badge-hot">公网</span>
+                </a>
+                <a href="#sjll" class="nav-item" onclick="navigate(event, 'sjll')">
+                    <span class="nav-icon">🦞</span>
+                    <span>SJLL 龙虾</span>
+                    <span class="nav-badge badge-updated">语音</span>
+                </a>
+                <a href="#home-hosts" class="nav-item" onclick="navigate(event, 'home-hosts')">
+                    <span class="nav-icon">🏠</span>
+                    <span>家庭主机</span>
+                    <span class="nav-badge badge-new">3</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">开发工具</div>
+                <a href="#git" class="nav-item" onclick="navigate(event, 'git')">
+                    <span class="nav-icon">📦</span>
+                    <span>Git 仓库</span>
+                </a>
+                <a href="#pm2" class="nav-item" onclick="navigate(event, 'pm2')">
+                    <span class="nav-icon">📊</span>
+                    <span>PM2 监控</span>
+                    <span class="nav-badge badge-hot">3</span>
+                </a>
+                <a href="#logs" class="nav-item" onclick="navigate(event, 'logs')">
+                    <span class="nav-icon">📋</span>
+                    <span>日志中心</span>
+                </a>
+                <a href="#proxy-test" class="nav-item" onclick="navigate(event, 'proxy-test')">
+                    <span class="nav-icon">🧪</span>
+                    <span>代理测试</span>
+                    <span class="nav-badge badge-new">U18</span>
+                </a>
+                <a href="#service-mgmt" class="nav-item" onclick="navigate(event, 'service-mgmt')">
+                    <span class="nav-icon">🔧</span>
+                    <span>服务管理</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">V9 开发</div>
+                <a href="/v9" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>开发进度</span>
+                    <span class="nav-badge badge-hot">P0</span>
+                </a>
+                <a href="#v9-tasks" class="nav-item" onclick="navigate(event, 'v9-tasks')">
+                    <span class="nav-icon">📋</span>
+                    <span>任务分工</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">AI 助手</div>
+                <a href="#ai-qwq" class="nav-item" onclick="navigate(event, 'ai-qwq')">
+                    <span class="nav-icon">🤖</span>
+                    <span>Qwen Code</span>
+                    <span class="nav-badge badge-hot">我</span>
+                </a>
+                <a href="#ai-gemini" class="nav-item" onclick="navigate(event, 'ai-gemini')">
+                    <span class="nav-icon">✨</span>
+                    <span>茜茜 (Gemini)</span>
+                    <span class="nav-badge badge-new">V9</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <h1 class="page-title">内网集成主页</h1>
+            <div class="top-actions">
+                <a href="/kb-docs/" class="icon-btn" title="知识库">📚</a>
+                <a href="#" class="icon-btn" title="刷新" onclick="location.reload()">🔄</a>
+                <button class="icon-btn" title="设置">⚙️</button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- AI Assistants -->
+            <h2 class="section-title" id="ai-assistants">AI 助手团队</h2>
+            <div class="service-grid">
+                <a href="/" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🤖</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Qwen Code (qwq)</div>
+                    <div class="service-desc">本地 Qwen Code 助手，OAuth 授权，支持代码编写、文件操作、Shell 执行等能力</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 /root/air/qwq</span>
+                        <span class="meta-item">🔌 portal.qwen.ai</span>
+                    </div>
+                </a>
+
+                <a href="http://localhost:8082" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">💬</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">free-claude-code</div>
+                    <div class="service-desc">Claude API 代理服务，支持多 Provider 故障切换，联通云/ NVIDIA/ OpenRouter</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 :8082</span>
+                        <span class="meta-item">🔗 Anthropic API</span>
+                    </div>
+                </a>
+
+                <a href="mobile-web/lobster.html" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🦞</div>
+                        <span class="service-status status-warning">配置中</span>
+                    </div>
+                    <div class="service-name">SJLL 龙虾语音</div>
+                    <div class="service-desc">Surface 龙虾 Cherry Studio，支持 NoizAI 语音交互，TTS 语音输出</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 sj-liuliang.local</span>
+                        <span class="meta-item">🎤 NoizAI</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Knowledge Base -->
+            <h2 class="section-title" id="knowledge">知识库</h2>
+            <div class="service-grid">
+                <a href="/kb-docs/" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📚</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Docsify 知识库</div>
+                    <div class="service-desc">专业文档系统，支持全文搜索、可折叠目录、代码高亮、图片缩放</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 :8772/kb-docs</span>
+                        <span class="meta-item">📄 Markdown</span>
+                    </div>
+                </a>
+
+                <a href="mobile-web/data.json" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📊</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">项目进度看板</div>
+                    <div class="service-desc">实时项目进度追踪，Mermaid 图表支持，燃尽图/甘特图/流程图</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 2-Projects/</span>
+                        <span class="meta-item">📈 Mermaid</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mobile -->
+            <h2 class="section-title" id="mobile">移动端</h2>
+            <div class="service-grid">
+                <a href="chat.html" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">💬</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">AI 对话 V3</div>
+                    <div class="service-desc">类微信聊天界面，多 Agent 切换，心跳检测，离线重连</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 :8770</span>
+                        <span class="meta-item">📱 PWA</span>
+                    </div>
+                </a>
+
+                <a href="hub.html" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🏠</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">AI Team Hub</div>
+                    <div class="service-desc">统一应用入口，全局搜索，系统状态，快捷操作，AI 对话模态框</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 mobile-web/</span>
+                        <span class="meta-item">🎨 深色模式</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Internal Services -->
+            <h2 class="section-title" id="clash">内网服务</h2>
+            <div class="service-grid">
+                <a href="#" class="service-card" onclick="showClashInfo(event)">
+                    <div class="service-header">
+                        <div class="service-icon">🌐</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">CC Clash 隧道</div>
+                    <div class="service-desc">CC 服务器 Clash 代理隧道，出口 IP 113.57.105.174，支持 Google/Anthropic API</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 CC:7890</span>
+                        <span class="meta-item">🔌 SSH 隧道</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card" onclick="showOneApiInfo(event)">
+                    <div class="service-header">
+                        <div class="service-icon">🔗</div>
+                        <span class="service-status status-warning">需启动</span>
+                    </div>
+                    <div class="service-name">One-API</div>
+                    <div class="service-desc">统一 API 网关，支持多模型路由，GLM5/ Qwen/ Claude等模型聚合</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 CC:3000</span>
+                        <span class="meta-item">🔄 多 Provider</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card" onclick="showAntigravityInfo(event)">
+                    <div class="service-header">
+                        <div class="service-icon">⚡</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Antigravity Proxy</div>
+                    <div class="service-desc">联通云 API 网关，nvapi 授权，支持 NVIDIA NIM 和 Claude 模型</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 CC:8045</span>
+                        <span class="meta-item">🔑 nvapi-***</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Remote Servers -->
+            <h2 class="section-title" id="cc-server">远程服务器</h2>
+            <div class="service-grid">
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🖥️</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">CC 服务器</div>
+                    <div class="service-desc">Claude Code 服务器，运行 free-claude-code 和 One-API，内网 IP 192.168.100.228</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 192.168.100.228</span>
+                        <span class="meta-item">🔌 databasei →</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🚪</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Gate 跳板机</div>
+                    <div class="service-desc">公网网关服务器，SSH 端口 8822，提供内网穿透和端口转发</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 113.57.105.174:8822</span>
+                        <span class="meta-item">🔐 SSH</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🦞</div>
+                        <span class="service-status status-warning">配置中</span>
+                    </div>
+                    <div class="service-name">SJLL 龙虾</div>
+                    <div class="service-desc">Surface 樱桃 Cherry Studio，支持 NoizAI 语音交互，内网穿透访问</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 sj-liuliang.local</span>
+                        <span class="meta-item">🔌 gate:8821</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Home Hosts -->
+            <h2 class="section-title" id="home-hosts">家庭主机</h2>
+            <div class="service-grid">
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📱</div>
+                        <span class="service-status status-warning">待连接</span>
+                    </div>
+                    <div class="service-name">sm95</div>
+                    <div class="service-desc">家庭终端服务器，内网 IP 192.168.3.3，SSH 端口 8022</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 192.168.3.3:8022</span>
+                        <span class="meta-item">🏠 家庭内网</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">💻</div>
+                        <span class="service-status status-warning">待连接</span>
+                    </div>
+                    <div class="service-name">mbpm1</div>
+                    <div class="service-desc">MacBook Pro，内网 IP 192.168.3.9，开发主力机</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 192.168.3.9:22</span>
+                        <span class="meta-item">🍎 macOS</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📟</div>
+                        <span class="service-status status-warning">待连接</span>
+                    </div>
+                    <div class="service-name">surface</div>
+                    <div class="service-desc">Surface 龙虾，内网 IP 192.168.3.200，Cherry Studio 语音交互</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 192.168.3.200:22</span>
+                        <span class="meta-item">🪟 Windows</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- AI Assistants -->
+            <h2 class="section-title" id="ai-qwq">AI 助手团队</h2>
+            <div class="service-grid">
+                <a href="/" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🤖</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Qwen Code (qwq) - 我</div>
+                    <div class="service-desc">本地 Qwen Code 助手，OAuth 授权，支持代码编写、文件操作、Shell 执行等能力</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 /root/air/qwq</span>
+                        <span class="meta-item">🔌 portal.qwen.ai</span>
+                    </div>
+                </a>
+
+                <a href="http://localhost:8082" class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">💬</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">Claude Code (mycc)</div>
+                    <div class="service-desc">Claude API 代理服务，支持多 Provider 故障切换，联通云/ NVIDIA/ OpenRouter</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 :8082</span>
+                        <span class="meta-item">🔗 Anthropic API</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card" onclick="showGeminiInfo(event)">
+                    <div class="service-header">
+                        <div class="service-icon">✨</div>
+                        <span class="service-status status-warning">需验证</span>
+                    </div>
+                    <div class="service-name">Gemini CLI</div>
+                    <div class="service-desc">Google Gemini CLI，OAuth 2.0 授权，版本 0.32.1，需 Clash 代理访问</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 /bin/gemini</span>
+                        <span class="meta-item">🔑 Google OAuth</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Proxy Test -->
+            <h2 class="section-title" id="proxy-test">代理测试</h2>
+            <div class="service-grid">
+                <a href="#" class="service-card" onclick="showRemoteProxyTest(event)">
+                    <div class="service-header">
+                        <div class="service-icon">🧪</div>
+                        <span class="service-status status-warning">待测试</span>
+                    </div>
+                    <div class="service-name">U18 远端代理测试</div>
+                    <div class="service-desc">通过手机 VPN 的 SSH 反向隧道测试外网访问，不依赖本地 Clash 隧道</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 U18 容器</span>
+                        <span class="meta-item">🔌 SSH -D 1080</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card" onclick="showClashTest(event)">
+                    <div class="service-header">
+                        <div class="service-icon">🧪</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">本地 Clash 测试</div>
+                    <div class="service-desc">通过 CC 服务器 Clash 隧道测试外网访问，出口 IP 113.57.105.174</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 localhost:7890</span>
+                        <span class="meta-item">🔌 SOCKS5</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Service Management -->
+            <h2 class="section-title" id="service-mgmt">服务管理</h2>
+            <div class="service-grid">
+                <a href="#" class="service-card" onclick="showServiceMgmtInfo(event)">
+                    <div class="service-header">
+                        <div class="service-icon">🔧</div>
+                        <span class="service-status status-online">指南</span>
+                    </div>
+                    <div class="service-name">AI 助手服务管理指南</div>
+                    <div class="service-desc">AI 助手无法直接强杀进程，需通过 PM2/脚本等上层系统间接管理服务</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 0-System/</span>
+                        <span class="meta-item">📖 文档</span>
+                    </div>
+                </a>
+
+                <a href="#" class="service-card" onclick="showPM2Info(event)">
+                    <div class="service-header">
+                        <div class="service-icon">📊</div>
+                        <span class="service-status status-online">运行中</span>
+                    </div>
+                    <div class="service-name">PM2 服务监控</div>
+                    <div class="service-desc">管理 free-claude-code/cc-clash-tunnel 等服务，支持重启/停止/查看日志</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 PM2</span>
+                        <span class="meta-item">🔌 3 服务</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- V9 Development -->
+            <h2 class="section-title" id="v9-tasks">V9 开发任务分工</h2>
+            <div class="service-grid">
+                <div class="service-card" style="cursor: default;">
+                    <div class="service-header">
+                        <div class="service-header">
+                            <div class="service-icon">👥</div>
+                            <span class="service-status status-online">进行中</span>
+                        </div>
+                    </div>
+                    <div class="service-name">任务分工方案</div>
+                    <div class="service-desc" style="margin-bottom: 15px;">
+                        <strong style="color: var(--primary);">茜茜 (Gemini)</strong>: 后端 API、技能系统模板、健康检查<br/>
+                        <strong style="color: var(--secondary);">qwq</strong>: Dashboard UI/UX、知识库内容、前端集成
+                    </div>
+                    <div class="card-actions">
+                        <a href="/v9" class="btn btn-primary">查看进度</a>
+                        <a href="/kb-docs/" class="btn btn-secondary">知识库</a>
+                    </div>
+                </div>
+
+                <a href="shared-tasks/processing/v9-task-assignment.md" class="service-card" target="_blank">
+                    <div class="service-header">
+                        <div class="service-icon">📄</div>
+                        <span class="service-status status-online">文档</span>
+                    </div>
+                    <div class="service-name">详细分工文档</div>
+                    <div class="service-desc">查看完整的任务分解、优先级和预计完成时间</div>
+                    <div class="service-meta">
+                        <span class="meta-item">📍 shared-tasks/</span>
+                        <span class="meta-item">📄 Markdown</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle Sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const main = document.getElementById('mainContent');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+            main.classList.toggle('sidebar-open');
+        }
+
+        // Navigate
+        function navigate(event, sectionId) {
+            if (sectionId.startsWith('http') || sectionId.startsWith('/')) {
+                return;
+            }
+            
+            event.preventDefault();
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Close sidebar on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+            
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // Info modals
+        function showClashInfo(event) {
+            event.preventDefault();
+            alert('CC Clash 隧道状态:\n\n✅ 运行中\n📍 端口：7890 (SOCKS5)\n🌐 出口 IP: 113.57.105.174\n🔌 隧道：localhost:7890 → CC:7890\n\n测试：curl --socks5-h localhost:7890 https://api.ip.sb/ip');
+        }
+
+        function showOneApiInfo(event) {
+            event.preventDefault();
+            alert('One-API 状态:\n\n⚠️ 需手动启动\n📍 端口：3000\n🔗 支持模型：GLM5/Qwen/Claude\n\n启动命令：\ncd /data/One-API && ./one-api');
+        }
+
+        function showAntigravityInfo(event) {
+            event.preventDefault();
+            alert('Antigravity Proxy 状态:\n\n✅ 运行中\n📍 端口：8045\n🔑 授权：nvapi-***\n🌐 支持：NVIDIA NIM, Claude\n\n配置位置：~/.gemini/.env');
+        }
+
+        function showGeminiInfo(event) {
+            event.preventDefault();
+            alert('Gemini CLI 状态:\n\n🔑 授权：Google OAuth 2.0\n📦 版本：0.32.1\n📍 位置：/bin/gemini\n🌐 访问：需 Clash 代理\n\n⚠️ 当前状态：需验证连通性\n\n配置位置：~/.config/gemini-cli/');
+        }
+
+        function showRemoteProxyTest(event) {
+            event.preventDefault();
+            alert('U18 远端代理测试:\n\n📱 方式：手机 VPN → SSH 反向隧道\n🔌 命令：ssh -N -D 1080 gate\n📍 测试：curl --socks5-h localhost:1080\n\n📋 测试脚本:\n/root/air/qwq/scripts/test-remote-proxy.sh');
+        }
+
+        function showClashTest(event) {
+            event.preventDefault();
+            alert('本地 Clash 测试:\n\n🌐 方式：CC 服务器 Clash 隧道\n🔌 命令：curl --socks5-h localhost:7890\n📍 出口 IP: 113.57.105.174\n\n✅ 当前状态：运行中');
+        }
+
+        function showServiceMgmtInfo(event) {
+            event.preventDefault();
+            alert('服务管理指南:\n\n⚠️ AI 助手不能直接 kill/pkill 进程!\n\n✅ 正确方式:\n1. pm2 restart <service>\n2. pm2 stop <service>\n3. bash 预定义脚本\n\n📖 文档：0-System/service-management-guide.md');
+        }
+
+        function showPM2Info(event) {
+            event.preventDefault();
+            alert('PM2 服务监控:\n\n📊 管理服务:\n0. free-claude-code (:8082)\n1. cc-clash-tunnel (SSH 隧道)\n2. cc-clash-watchdog (健康检查)\n\n🔌 常用命令:\npm2 status - 查看状态\npm2 restart <name> - 重启\npm2 logs <name> - 日志');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Toggle sidebar with 'S'
+            if (e.key === 's' && !e.ctrlKey && !e.metaKey) {
+                toggleSidebar();
+            }
+            
+            // Search with '/'
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                // Add search functionality here
+            }
+        });
+
+        // Close sidebar on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('open')) {
+                    toggleSidebar();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+{
+  "history": [
+    {
+      "time": "22:06",
+      "agent": "qwq",
+      "message": "你好",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？\n"
+    },
+    {
+      "time": "23:16",
+      "agent": "qwq",
+      "message": "Hi~ o(*￣▽￣*)ブ",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？\n"
+    },
+    {
+      "time": "23:17",
+      "agent": "qwq",
+      "message": "test",
+      "response": "✅ 执行完成 (无输出)"
+    },
+    {
+      "time": "23:26",
+      "agent": "qwq",
+      "message": "test",
+      "response": "✅ 执行完成 (无输出)"
+    },
+    {
+      "time": "23:27",
+      "agent": "mycc",
+      "message": "8",
+      "response": "/bin/sh: 1: 8: not found\n"
+    },
+    {
+      "time": "00:10",
+      "agent": "qwq",
+      "message": "hello",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？\n"
+    },
+    {
+      "time": "00:11",
+      "agent": "qwq",
+      "message": "你是谁",
+      "response": "/bin/sh: 1: 你是谁: not found\n"
+    },
+    {
+      "time": "14:16",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:16",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:37",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:37",
+      "agent": "qwq",
+      "message": "时间",
+      "response": "/bin/sh: 1: 时间: not found\n"
+    },
+    {
+      "time": "14:38",
+      "agent": "qwq",
+      "message": "测试对话记录",
+      "response": "✅ 测试成功！\n\n系统运行正常，随时为您服务。"
+    },
+    {
+      "time": "14:39",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:39",
+      "agent": "qwq",
+      "message": "你是谁",
+      "response": "/bin/sh: 1: 你是谁: not found\n"
+    },
+    {
+      "time": "14:39",
+      "agent": "qwq",
+      "message": "date",
+      "response": "Sat Mar  7 14:39:23 HKT 2026\n"
+    },
+    {
+      "time": "14:40",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:40",
+      "agent": "qwq",
+      "message": "你好",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？"
+    },
+    {
+      "time": "14:41",
+      "agent": "qwq",
+      "message": "你好",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？"
+    },
+    {
+      "time": "14:41",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:41",
+      "agent": "qwq",
+      "message": "date",
+      "response": "Sat Mar  7 14:41:21 HKT 2026\n"
+    },
+    {
+      "time": "14:41",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:41",
+      "agent": "qwq",
+      "message": "你是谁",
+      "response": "/bin/sh: 1: 你是谁: not found\n"
+    },
+    {
+      "time": "14:42",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:42",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:43",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:43",
+      "agent": "qwq",
+      "message": "你是谁",
+      "response": "/bin/sh: 1: 你是谁: not found\n"
+    },
+    {
+      "time": "14:43",
+      "agent": "qwq",
+      "message": "date",
+      "response": "Sat Mar  7 14:43:53 HKT 2026\n"
+    },
+    {
+      "time": "14:45",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:45",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:46",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:49",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:49",
+      "agent": "qwq",
+      "message": "你是谁",
+      "response": "/bin/sh: 1: 你是谁: not found\n"
+    },
+    {
+      "time": "14:49",
+      "agent": "qwq",
+      "message": "你好",
+      "response": "你好！我是 AI Team 助手 👋\n\n我可以帮你：\n• 查看服务状态\n• 管理任务队列\n• 统计用量\n• 检查代理\n\n有什么可以帮你的吗？"
+    },
+    {
+      "time": "14:50",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "14:52",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "/bin/sh: 1: 现在几点了: not found\n"
+    },
+    {
+      "time": "15:11",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "当前时间：2026-03-07 15:11:11"
+    },
+    {
+      "time": "15:11",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "当前时间：2026-03-07 15:11:23"
+    },
+    {
+      "time": "15:14",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "当前时间：2026-03-07 15:14:21"
+    },
+    {
+      "time": "15:20",
+      "agent": "qwq",
+      "message": "现在几点了",
+      "response": "当前时间：2026-03-07 15:20:36"
+    },
+    {
+      "time": "09:08",
+      "agent": "gemini",
+      "message": "测试",
+      "response": "好的，我将使用 `codebase_investigator` 工具来调查当前项目，找出可能需要测试的内容，并提供建议。\n\n用户输入了“测试”一词，但没有提供任何具体细节。请调查当前项目（包括但不限于脚本、工具或 CLI 功能）中可能需要测试的内容，并提出建议。我需要了解用户可能想要测试什么，以便采取相应的行动。\n您想测试什么？"
+    },
+    {
+      "time": "09:39",
+      "agent": "gemini",
+      "message": "注册表架构自测",
+      "response": "我已完成对代码库中“注册表”相关部分的初步调查。\n\n根据调查结果，我发现了三个可能符合您“注册表架构”描述的组件：\n\n1.  **进程注册表 (`cli/process_registry.py`)**: 这是一个诊断和稳定性组件，用于跟踪应用程序启动的子进程 ID。当主应用程序退出时，它会尝试终止所有已注册的进程，以防止进程孤立。这可以看作是一种自我修复（self-healing）机制。\n2.  **消息树注册表 (`messaging/trees/repository.py`)**: 这是应用程序核心逻辑的一部分，用于将消息组织成对话树。它是一个内存数据库，可以将整个注册表状态序列化（通过 `to_dict` 和 `from_dict` 方法）。这可能用于持久化、调试或状态恢复。\n3.  **SSE 工具名注册表 (`providers/common/sse_builder.py`)**: 这是一个在创建 Server-Sent Event 流时用于管理工具数据的低级注册表。\n\n目前已识别出的主要“自检或诊断”机制包括：\n*   进程注册表在程序退出时会执行清理操作（通过 `atexit`）。\n*   消息树注册表具备状态序列化能力（`to_dict`/`from_dict`），这通常是用于诊断或恢复的。\n\n要更深入地了解这些注册表的具体自检功能，需要进一步追踪 `messaging/trees/repository.py` 中 `to_dict`/`from_dict` 方法的使用情况，以确定其状态管理和恢复的实际应用场景。"
+    },
+    {
+      "time": "09:57",
+      "agent": "mycc",
+      "message": "云端节点联通性自测，请回复状态。",
+      "response": "📡 远程节点不可达 (http://192.168.100.228:8083/v1/messages): <urlopen error timed out>"
+    },
+    {
+      "time": "09:59",
+      "agent": "mycc",
+      "message": "MyCC 代理节点连通自测，请只回复一行确认收到指令。",
+      "response": "📡 远程节点不可达 (http://192.168.100.228:8083/v1/messages): <urlopen error timed out>"
+    },
+    {
+      "time": "10:00",
+      "agent": "mycc",
+      "message": "MyCC 代理节点连通自测，请只回复一行确认收到指令。",
+      "response": "📡 MyCC 代理节点不可达: HTTP Error 422: Unprocessable Entity"
+    },
+    {
+      "time": "10:02",
+      "agent": "mycc",
+      "message": "MyCC 代理节点连通自测，收到请简短回复确认。",
+      "response": "📡 MyCC 代理节点不可达: HTTP Error 422: Unprocessable Entity"
+    },
+    {
+      "time": "10:04",
+      "agent": "mycc",
+      "message": "你好，请确认你的云端服务已恢复。",
+      "response": "📡 MyCC 代理节点不可达: HTTP Error 422: Unprocessable Entity"
+    },
+    {
+      "time": "10:59",
+      "agent": "gemini",
+      "message": "进度如何",
+      "response": "I need to initialize the todo list first. What task should I be tracking?"
+    },
+    {
+      "time": "11:00",
+      "agent": "qwq",
+      "message": "进度如何",
+      "response": "/bin/sh: 1: 进度如何: not found\n"
+    },
+    {
+      "time": "11:06",
+      "agent": "gemini",
+      "message": "状态",
+      "response": "好的，我将为您提供当前项目“mobile-web”的“状态”概览。\n\n为了更准确地评估项目状态，我需要查看一些关键文件，例如：\n\n1.  **最新发布/变更记录：** 查找最新的 `*-RELEASE.md` 文件、`CHANGELOG.md` 或 `VERSIONS.md` 来了解项目版本和近期更新。\n2.  **核心文档：** 查看 `README.md` 文件以了解项目概述和当前状态。\n\n请稍候，我将开始分析这些文件。"
+    }
+  ],
+  "notifications": [
+    {
+      "time": "22:05",
+      "title": "V7 发布",
+      "content": "✨ 持久化存储\n📝 修复回复格式\n🔄 刷新保留历史",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "22:06",
+      "title": "V7 发布",
+      "content": "✨ 持久化存储\n📝 修复回复格式\n🔄 刷新保留历史",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:12",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:12",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:29",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:29",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:30",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:30",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:31",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:32",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:32",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:34",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:35",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:35",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:36",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "16:22",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "16:23",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "20:35",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "08:54",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "08:55",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:06",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:06",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:06",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:07",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:08",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:43",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:44",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:57",
+      "title": "任务更新: 接入远程 CC 服务器 Agent 接口",
+      "content": "状态已变更为: completed",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "09:57",
+      "title": "任务更新: 同步云端/Gate 节点心跳",
+      "content": "状态已变更为: in_progress",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "10:00",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "10:04",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "10:26",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    },
+    {
+      "time": "03:22",
+      "title": "V8 发布",
+      "content": "✨ 底部空隙优化\n💚 连接状态检测\n💓 10 秒心跳\n🔄 离线重连\n📚 知识库：/kb",
+      "type": "success",
+      "read": false
+    }
+  ]
+}

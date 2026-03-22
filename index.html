@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库索引 - qwq</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .stat {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .nav {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .nav-item {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        .nav-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        .file-list {
+            display: grid;
+            gap: 10px;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .file-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        .file-link {
+            text-decoration: none;
+            color: #333;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-title {
+            font-weight: 500;
+        }
+        .date-badge {
+            background: #667eea;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        .file-meta {
+            color: #6c757d;
+            font-size: 0.85em;
+        }
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            h1 { font-size: 1.5em; }
+            .nav {
+                position: static;
+                flex-direction: column;
+            }
+            .stats { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 知识库索引</h1>
+            <p>本地知识库网页版 - 支持全文链接跳转</p>
+            <div class="stats">
+                <div class="stat">📄 198 文档</div>
+                <div class="stat">📝 124,736 字</div>
+                <div class="stat">📁 12 目录</div>
+                <div class="stat">🕐 2026-03-07 11:32</div>
+            </div>
+            <input type="text" class="search-box" id="searchBox" placeholder="🔍 搜索文档标题..." onkeyup="filterFiles()">
+        </header>
+        
+        <nav class="nav">
+            <a href="#." class="nav-item">. (4)</a>
+<a href="#.qwen" class="nav-item">.qwen (2)</a>
+<a href="#0-System" class="nav-item">🧠 系统记忆 (29)</a>
+<a href="#2-Projects" class="nav-item">🚀 项目 (4)</a>
+<a href="#4-Assets" class="nav-item">📦 资产 (7)</a>
+<a href="#6-Diaries" class="nav-item">📔 日记 (5)</a>
+<a href="#agents-team" class="nav-item">🤖 Agent 团队 (1)</a>
+<a href="#mobile-web" class="nav-item">📱 移动端 (132)</a>
+<a href="#mobile-web-v1" class="nav-item">mobile-web-v1 (2)</a>
+<a href="#scripts" class="nav-item">scripts (1)</a>
+<a href="#shared-tasks" class="nav-item">🤖 协同任务 (7)</a>
+<a href="#tasks" class="nav-item">📋 任务 (4)</a>
+        </nav>
+        
+        <main>
+            
+        <section id="network" class="section">
+            <h2 class="section-title">🚀 极速组网 (新)</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/tailscale-derp-guide.md" class="file-link">
+                    <span class="file-title">Tailscale 私有 DERP 加速部署指南 (JSON配置复制)</span>
+                    <span class="date-badge">2026-03-08</span>
+                </a>
+                <span class="file-meta">解决延迟卡顿问题</span>
+            </div>
+            
+            </div>
+        </section>
+
+        <section id="." class="section">
+            <h2 class="section-title">.</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/QWEN.md" class="file-link">
+                    <span class="file-title">Qwen Code - Global Memory & Capabilities</span>
+                    
+                </a>
+                <span class="file-meta">397 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/README.md" class="file-link">
+                    <span class="file-title">qwq 系统总结</span>
+                    
+                </a>
+                <span class="file-meta">394 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/COMPLETE-STATUS.md" class="file-link">
+                    <span class="file-title">AI Team 系统 - 完整状态报告</span>
+                    
+                </a>
+                <span class="file-meta">674 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/COMPLETE-FEATURES.md" class="file-link">
+                    <span class="file-title">AI Team 系统 - 完整功能清单</span>
+                    
+                </a>
+                <span class="file-meta">766 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id=".qwen" class="section">
+            <h2 class="section-title">.qwen</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/.qwen/DASHBOARD.md" class="file-link">
+                    <span class="file-title">Qwen 能力看板</span>
+                    
+                </a>
+                <span class="file-meta">72 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/.qwen/skills/qwq-usage/SKILL.md" class="file-link">
+                    <span class="file-title">qwq-usage — Token 用量统计</span>
+                    
+                </a>
+                <span class="file-meta">146 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="0-System" class="section">
+            <h2 class="section-title">🧠 系统记忆</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/0-System/agents/mycc/2026-03-05_model-priority-ha-retry.md" class="file-link">
+                    <span class="file-title">任务：模型优先级调整 + HA 重试退避系统</span>
+                    <span class="date-badge">2026-03-05</span>
+                </a>
+                <span class="file-meta">95 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/status.md" class="file-link">
+                    <span class="file-title">Status（短期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">81 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/cc-clash-tunnel-issue.md" class="file-link">
+                    <span class="file-title">CC Clash Tunnel 系统故障报告</span>
+                    
+                </a>
+                <span class="file-meta">256 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/ssh-gate-refactor-plan.md" class="file-link">
+                    <span class="file-title">SSH 配置重构方案</span>
+                    
+                </a>
+                <span class="file-meta">311 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/sv-service-manager.md" class="file-link">
+                    <span class="file-title">sv-style 服务管理系统文档</span>
+                    
+                </a>
+                <span class="file-meta">613 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/architecture-decoupling.md" class="file-link">
+                    <span class="file-title">系统架构解耦方案</span>
+                    
+                </a>
+                <span class="file-meta">1042 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/termux-architecture.md" class="file-link">
+                    <span class="file-title">Termux + U22 分层架构指南</span>
+                    
+                </a>
+                <span class="file-meta">794 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/termux-ssh-guide.md" class="file-link">
+                    <span class="file-title">从 U22 SSH 连接到 Termux</span>
+                    
+                </a>
+                <span class="file-meta">567 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/termux-done.md" class="file-link">
+                    <span class="file-title">Termux + U22 架构完成报告</span>
+                    
+                </a>
+                <span class="file-meta">581 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/termux-sshd-autostart.md" class="file-link">
+                    <span class="file-title">Termux SSHD 长期运行指南</span>
+                    
+                </a>
+                <span class="file-meta">654 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/qwq-api-usage.md" class="file-link">
+                    <span class="file-title">Qwen Code API 配置与用量统计</span>
+                    
+                </a>
+                <span class="file-meta">573 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/api-topology.md" class="file-link">
+                    <span class="file-title">Qwen Code API 调用拓扑与配置</span>
+                    
+                </a>
+                <span class="file-meta">646 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/qwen-real-api.md" class="file-link">
+                    <span class="file-title">Qwen Code (千问) 真实 API 配置</span>
+                    
+                </a>
+                <span class="file-meta">630 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/global-ai-topology.md" class="file-link">
+                    <span class="file-title">全局 AI 助手完整拓扑</span>
+                    
+                </a>
+                <span class="file-meta">716 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/gemini-clash-proxy-setup.md" class="file-link">
+                    <span class="file-title">Gemini CLI Clash 代理设置指南</span>
+                    
+                </a>
+                <span class="file-meta">530 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/ssh-unified-config.md" class="file-link">
+                    <span class="file-title">SSH 统一配置与防 Ban 指南</span>
+                    
+                </a>
+                <span class="file-meta">574 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/gemini-proxy-troubleshooting.md" class="file-link">
+                    <span class="file-title">Gemini 代理故障诊断</span>
+                    
+                </a>
+                <span class="file-meta">269 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/cloud-deployment-plan.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构与云部署计划</span>
+                    
+                </a>
+                <span class="file-meta">1217 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/quick-start-cloud.md" class="file-link">
+                    <span class="file-title">☁️ 云部署快速指南</span>
+                    
+                </a>
+                <span class="file-meta">248 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/context.md" class="file-link">
+                    <span class="file-title">Context（中期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">86 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/ARCHITECTURE.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构</span>
+                    
+                </a>
+                <span class="file-meta">445 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/architecture-v9.md" class="file-link">
+                    <span class="file-title">AI Team 架构分析与升级建议</span>
+                    
+                </a>
+                <span class="file-meta">771 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/agents-team-report.md" class="file-link">
+                    <span class="file-title">Agents Team 分布式协同系统 - 完成报告</span>
+                    
+                </a>
+                <span class="file-meta">341 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/system-health-report.md" class="file-link">
+                    <span class="file-title">系统回溯检测报告</span>
+                    
+                </a>
+                <span class="file-meta">644 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/system-audit-report.md" class="file-link">
+                    <span class="file-title">全局系统检查报告</span>
+                    
+                </a>
+                <span class="file-meta">508 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/system-final-audit.md" class="file-link">
+                    <span class="file-title">系统全局检查与修复报告</span>
+                    
+                </a>
+                <span class="file-meta">459 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/about-me/profile.md" class="file-link">
+                    <span class="file-title">关于用户 (长期记忆)</span>
+                    
+                </a>
+                <span class="file-meta">67 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/about-me/sjll-lobster.md" class="file-link">
+                    <span class="file-title">SJLL 龙虾连接状态</span>
+                    
+                </a>
+                <span class="file-meta">102 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/0-System/agents/mycc/oneapi-ha-config.md" class="file-link">
+                    <span class="file-title">One-API 高可用配置方案</span>
+                    
+                </a>
+                <span class="file-meta">714 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="2-Projects" class="section">
+            <h2 class="section-title">🚀 项目</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/2-Projects/mobile-v3-release.md" class="file-link">
+                    <span class="file-title">项目：Mobile V3 聊天窗口版</span>
+                    
+                </a>
+                <span class="file-meta">85 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/2-Projects/project-board.md" class="file-link">
+                    <span class="file-title">项目看板</span>
+                    
+                </a>
+                <span class="file-meta">397 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/2-Projects/optimization-roadmap.md" class="file-link">
+                    <span class="file-title">AI Team 系统优化路线图</span>
+                    
+                </a>
+                <span class="file-meta">275 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/2-Projects/architecture-v6.md" class="file-link">
+                    <span class="file-title">AI Team Hub - 架构优化蓝图</span>
+                    
+                </a>
+                <span class="file-meta">899 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="4-Assets" class="section">
+            <h2 class="section-title">📦 资产</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/system-architecture.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构资产</span>
+                    
+                </a>
+                <span class="file-meta">352 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/hooks-config.md" class="file-link">
+                    <span class="file-title">Qwen Code Hooks 配置</span>
+                    
+                </a>
+                <span class="file-meta">141 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/git-version-control.md" class="file-link">
+                    <span class="file-title">Git 版本控制指南</span>
+                    
+                </a>
+                <span class="file-meta">316 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/unicom-config/SKILL.md" class="file-link">
+                    <span class="file-title">cc-switch 模型热切换</span>
+                    
+                </a>
+                <span class="file-meta">137 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/unicom-config/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/unicom-config/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/4-Assets/unicom-config/README.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置归档</span>
+                    
+                </a>
+                <span class="file-meta">333 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="6-Diaries" class="section">
+            <h2 class="section-title">📔 日记</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/6-Diaries/2026-03/2026-03-07.md" class="file-link">
+                    <span class="file-title">Daily Diary</span>
+                    <span class="date-badge">2026-03-07</span>
+                </a>
+                <span class="file-meta">918 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/6-Diaries/README.md" class="file-link">
+                    <span class="file-title">Daily Diary System</span>
+                    
+                </a>
+                <span class="file-meta">375 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/6-Diaries/conversations/conversations-20260307-090453.md" class="file-link">
+                    <span class="file-title">Multi-Agent Conversations</span>
+                    
+                </a>
+                <span class="file-meta">14888 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/6-Diaries/templates/daily-template.md" class="file-link">
+                    <span class="file-title">{{DATE}} 工作日志</span>
+                    
+                </a>
+                <span class="file-meta">120 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/6-Diaries/templates/weekly-template.md" class="file-link">
+                    <span class="file-title">第 {{WEEK_NUMBER}} 周工作总结</span>
+                    
+                </a>
+                <span class="file-meta">175 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="agents-team" class="section">
+            <h2 class="section-title">🤖 Agent 团队</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/agents-team/README.md" class="file-link">
+                    <span class="file-title">Agents Team - 分布式协同系统</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="mobile-web" class="section">
+            <h2 class="section-title">📱 移动端</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/6-Diaries/2026-03/2026-03-07.md" class="file-link">
+                    <span class="file-title">Daily Diary</span>
+                    <span class="date-badge">2026-03-07</span>
+                </a>
+                <span class="file-meta">918 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/6-Diaries/2026-03/2026-03-07.md" class="file-link">
+                    <span class="file-title">Daily Diary</span>
+                    <span class="date-badge">2026-03-07</span>
+                </a>
+                <span class="file-meta">918 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/agents/mycc/2026-03-05_model-priority-ha-retry.md" class="file-link">
+                    <span class="file-title">任务：模型优先级调整 + HA 重试退避系统</span>
+                    <span class="date-badge">2026-03-05</span>
+                </a>
+                <span class="file-meta">95 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/agents/mycc/2026-03-05_model-priority-ha-retry.md" class="file-link">
+                    <span class="file-title">任务：模型优先级调整 + HA 重试退避系统</span>
+                    <span class="date-badge">2026-03-05</span>
+                </a>
+                <span class="file-meta">95 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile V2 Lite</span>
+                    
+                </a>
+                <span class="file-meta">237 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/KNOWLEDGE-LAUNCH.md" class="file-link">
+                    <span class="file-title">知识库网页版上线报告</span>
+                    
+                </a>
+                <span class="file-meta">478 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/KB-MARKDOWN-UPDATE.md" class="file-link">
+                    <span class="file-title">知识库 Markdown 渲染支持</span>
+                    
+                </a>
+                <span class="file-meta">294 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/KB-V2-RELEASE.md" class="file-link">
+                    <span class="file-title">知识库 V2.0 发布说明</span>
+                    
+                </a>
+                <span class="file-meta">582 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/HUB-V3-RELEASE.md" class="file-link">
+                    <span class="file-title">AI Team Hub V3 - 统一应用主页</span>
+                    
+                </a>
+                <span class="file-meta">563 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/V4-RELEASE.md" class="file-link">
+                    <span class="file-title">AI Team Hub V4 - AI 深度整合版</span>
+                    
+                </a>
+                <span class="file-meta">453 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/V5-RELEASE.md" class="file-link">
+                    <span class="file-title">AI Team Hub V5 - 监控 + 稳定性增强</span>
+                    
+                </a>
+                <span class="file-meta">598 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/V6-RELEASE.md" class="file-link">
+                    <span class="file-title">AI Team Hub V6 - PWA + 国际一流架构</span>
+                    
+                </a>
+                <span class="file-meta">803 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/QWEN.md" class="file-link">
+                    <span class="file-title">Qwen Code - Global Memory & Capabilities</span>
+                    
+                </a>
+                <span class="file-meta">397 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/README.md" class="file-link">
+                    <span class="file-title">知识库网页版</span>
+                    
+                </a>
+                <span class="file-meta">76 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/_sidebar.md" class="file-link">
+                    <span class="file-title">_sidebar</span>
+                    
+                </a>
+                <span class="file-meta">148 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/_navbar.md" class="file-link">
+                    <span class="file-title">_navbar</span>
+                    
+                </a>
+                <span class="file-meta">12 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/.qwen/DASHBOARD.md" class="file-link">
+                    <span class="file-title">Qwen 能力看板</span>
+                    
+                </a>
+                <span class="file-meta">72 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/.qwen/skills/qwq-usage/SKILL.md" class="file-link">
+                    <span class="file-title">qwq-usage — Token 用量统计</span>
+                    
+                </a>
+                <span class="file-meta">146 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/status.md" class="file-link">
+                    <span class="file-title">Status（短期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">81 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/cc-clash-tunnel-issue.md" class="file-link">
+                    <span class="file-title">CC Clash Tunnel 系统故障报告</span>
+                    
+                </a>
+                <span class="file-meta">256 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/ssh-gate-refactor-plan.md" class="file-link">
+                    <span class="file-title">SSH 配置重构方案</span>
+                    
+                </a>
+                <span class="file-meta">311 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/sv-service-manager.md" class="file-link">
+                    <span class="file-title">sv-style 服务管理系统文档</span>
+                    
+                </a>
+                <span class="file-meta">613 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/architecture-decoupling.md" class="file-link">
+                    <span class="file-title">系统架构解耦方案</span>
+                    
+                </a>
+                <span class="file-meta">1042 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/termux-architecture.md" class="file-link">
+                    <span class="file-title">Termux + U22 分层架构指南</span>
+                    
+                </a>
+                <span class="file-meta">794 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/termux-ssh-guide.md" class="file-link">
+                    <span class="file-title">从 U22 SSH 连接到 Termux</span>
+                    
+                </a>
+                <span class="file-meta">567 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/termux-done.md" class="file-link">
+                    <span class="file-title">Termux + U22 架构完成报告</span>
+                    
+                </a>
+                <span class="file-meta">581 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/termux-sshd-autostart.md" class="file-link">
+                    <span class="file-title">Termux SSHD 长期运行指南</span>
+                    
+                </a>
+                <span class="file-meta">654 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/qwq-api-usage.md" class="file-link">
+                    <span class="file-title">Qwen Code API 配置与用量统计</span>
+                    
+                </a>
+                <span class="file-meta">573 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/api-topology.md" class="file-link">
+                    <span class="file-title">Qwen Code API 调用拓扑与配置</span>
+                    
+                </a>
+                <span class="file-meta">646 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/qwen-real-api.md" class="file-link">
+                    <span class="file-title">Qwen Code (千问) 真实 API 配置</span>
+                    
+                </a>
+                <span class="file-meta">630 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/global-ai-topology.md" class="file-link">
+                    <span class="file-title">全局 AI 助手完整拓扑</span>
+                    
+                </a>
+                <span class="file-meta">716 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/gemini-clash-proxy-setup.md" class="file-link">
+                    <span class="file-title">Gemini CLI Clash 代理设置指南</span>
+                    
+                </a>
+                <span class="file-meta">530 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/ssh-unified-config.md" class="file-link">
+                    <span class="file-title">SSH 统一配置与防 Ban 指南</span>
+                    
+                </a>
+                <span class="file-meta">574 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/gemini-proxy-troubleshooting.md" class="file-link">
+                    <span class="file-title">Gemini 代理故障诊断</span>
+                    
+                </a>
+                <span class="file-meta">269 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/cloud-deployment-plan.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构与云部署计划</span>
+                    
+                </a>
+                <span class="file-meta">1217 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/quick-start-cloud.md" class="file-link">
+                    <span class="file-title">☁️ 云部署快速指南</span>
+                    
+                </a>
+                <span class="file-meta">248 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/context.md" class="file-link">
+                    <span class="file-title">Context（中期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">86 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/ARCHITECTURE.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构</span>
+                    
+                </a>
+                <span class="file-meta">445 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/architecture-v9.md" class="file-link">
+                    <span class="file-title">AI Team 架构分析与升级建议</span>
+                    
+                </a>
+                <span class="file-meta">771 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/agents-team-report.md" class="file-link">
+                    <span class="file-title">Agents Team 分布式协同系统 - 完成报告</span>
+                    
+                </a>
+                <span class="file-meta">341 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/system-health-report.md" class="file-link">
+                    <span class="file-title">系统回溯检测报告</span>
+                    
+                </a>
+                <span class="file-meta">644 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/agents/mycc/oneapi-ha-config.md" class="file-link">
+                    <span class="file-title">One-API 高可用配置方案</span>
+                    
+                </a>
+                <span class="file-meta">714 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/about-me/profile.md" class="file-link">
+                    <span class="file-title">关于用户 (长期记忆)</span>
+                    
+                </a>
+                <span class="file-meta">67 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/0-System/about-me/sjll-lobster.md" class="file-link">
+                    <span class="file-title">SJLL 龙虾连接状态</span>
+                    
+                </a>
+                <span class="file-meta">102 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/2-Projects/mobile-v3-release.md" class="file-link">
+                    <span class="file-title">项目：Mobile V3 聊天窗口版</span>
+                    
+                </a>
+                <span class="file-meta">85 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/system-architecture.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构资产</span>
+                    
+                </a>
+                <span class="file-meta">352 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/hooks-config.md" class="file-link">
+                    <span class="file-title">Qwen Code Hooks 配置</span>
+                    
+                </a>
+                <span class="file-meta">141 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/git-version-control.md" class="file-link">
+                    <span class="file-title">Git 版本控制指南</span>
+                    
+                </a>
+                <span class="file-meta">316 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/unicom-config/SKILL.md" class="file-link">
+                    <span class="file-title">cc-switch 模型热切换</span>
+                    
+                </a>
+                <span class="file-meta">137 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/unicom-config/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/unicom-config/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/4-Assets/unicom-config/README.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置归档</span>
+                    
+                </a>
+                <span class="file-meta">333 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/tasks/知识库同步与 Agent 互通.md" class="file-link">
+                    <span class="file-title">知识库同步与 Agent 互通</span>
+                    
+                </a>
+                <span class="file-meta">199 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/tasks/cloud-deployment.md" class="file-link">
+                    <span class="file-title">任务：云部署到 Vercel</span>
+                    
+                </a>
+                <span class="file-meta">105 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/tasks/vercel-deployment-ready.md" class="file-link">
+                    <span class="file-title">任务：Vercel 云部署准备就绪</span>
+                    
+                </a>
+                <span class="file-meta">206 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/tasks/v9-development-plan.md" class="file-link">
+                    <span class="file-title">AI Team V9 开发计划</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/PROTOCOL.md" class="file-link">
+                    <span class="file-title">qwq ↔ mycc 共享协议</span>
+                    
+                </a>
+                <span class="file-meta">132 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/WORKFLOW.md" class="file-link">
+                    <span class="file-title">Agent 协同工作流</span>
+                    
+                </a>
+                <span class="file-meta">197 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/DASHBOARD.md" class="file-link">
+                    <span class="file-title">🤖 Agent Network Dashboard</span>
+                    
+                </a>
+                <span class="file-meta">220 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/team-status.md" class="file-link">
+                    <span class="file-title">AI 助理团队状态与任务分配</span>
+                    
+                </a>
+                <span class="file-meta">544 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/shared-tasks/processing/gemini-proxy-status.md" class="file-link">
+                    <span class="file-title">Gemini 代理测试状态</span>
+                    
+                </a>
+                <span class="file-meta">84 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile V2 Lite</span>
+                    
+                </a>
+                <span class="file-meta">237 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/QWEN.md" class="file-link">
+                    <span class="file-title">Qwen Code - Global Memory & Capabilities</span>
+                    
+                </a>
+                <span class="file-meta">397 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/README.md" class="file-link">
+                    <span class="file-title">qwq 系统总结</span>
+                    
+                </a>
+                <span class="file-meta">394 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/6-Diaries/README.md" class="file-link">
+                    <span class="file-title">Daily Diary System</span>
+                    
+                </a>
+                <span class="file-meta">375 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/6-Diaries/conversations/conversations-20260307-090453.md" class="file-link">
+                    <span class="file-title">Multi-Agent Conversations</span>
+                    
+                </a>
+                <span class="file-meta">14888 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/status.md" class="file-link">
+                    <span class="file-title">Status（短期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">81 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/cc-clash-tunnel-issue.md" class="file-link">
+                    <span class="file-title">CC Clash Tunnel 系统故障报告</span>
+                    
+                </a>
+                <span class="file-meta">256 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/ssh-gate-refactor-plan.md" class="file-link">
+                    <span class="file-title">SSH 配置重构方案</span>
+                    
+                </a>
+                <span class="file-meta">311 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/sv-service-manager.md" class="file-link">
+                    <span class="file-title">sv-style 服务管理系统文档</span>
+                    
+                </a>
+                <span class="file-meta">613 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/architecture-decoupling.md" class="file-link">
+                    <span class="file-title">系统架构解耦方案</span>
+                    
+                </a>
+                <span class="file-meta">1042 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/termux-architecture.md" class="file-link">
+                    <span class="file-title">Termux + U22 分层架构指南</span>
+                    
+                </a>
+                <span class="file-meta">794 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/termux-ssh-guide.md" class="file-link">
+                    <span class="file-title">从 U22 SSH 连接到 Termux</span>
+                    
+                </a>
+                <span class="file-meta">567 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/termux-done.md" class="file-link">
+                    <span class="file-title">Termux + U22 架构完成报告</span>
+                    
+                </a>
+                <span class="file-meta">581 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/termux-sshd-autostart.md" class="file-link">
+                    <span class="file-title">Termux SSHD 长期运行指南</span>
+                    
+                </a>
+                <span class="file-meta">654 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/qwq-api-usage.md" class="file-link">
+                    <span class="file-title">Qwen Code API 配置与用量统计</span>
+                    
+                </a>
+                <span class="file-meta">573 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/api-topology.md" class="file-link">
+                    <span class="file-title">Qwen Code API 调用拓扑与配置</span>
+                    
+                </a>
+                <span class="file-meta">646 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/qwen-real-api.md" class="file-link">
+                    <span class="file-title">Qwen Code (千问) 真实 API 配置</span>
+                    
+                </a>
+                <span class="file-meta">630 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/global-ai-topology.md" class="file-link">
+                    <span class="file-title">全局 AI 助手完整拓扑</span>
+                    
+                </a>
+                <span class="file-meta">716 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/gemini-clash-proxy-setup.md" class="file-link">
+                    <span class="file-title">Gemini CLI Clash 代理设置指南</span>
+                    
+                </a>
+                <span class="file-meta">530 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/ssh-unified-config.md" class="file-link">
+                    <span class="file-title">SSH 统一配置与防 Ban 指南</span>
+                    
+                </a>
+                <span class="file-meta">574 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/gemini-proxy-troubleshooting.md" class="file-link">
+                    <span class="file-title">Gemini 代理故障诊断</span>
+                    
+                </a>
+                <span class="file-meta">269 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/cloud-deployment-plan.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构与云部署计划</span>
+                    
+                </a>
+                <span class="file-meta">1217 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/quick-start-cloud.md" class="file-link">
+                    <span class="file-title">☁️ 云部署快速指南</span>
+                    
+                </a>
+                <span class="file-meta">248 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/context.md" class="file-link">
+                    <span class="file-title">Context（中期记忆）</span>
+                    
+                </a>
+                <span class="file-meta">86 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/ARCHITECTURE.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构</span>
+                    
+                </a>
+                <span class="file-meta">445 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/architecture-v9.md" class="file-link">
+                    <span class="file-title">AI Team 架构分析与升级建议</span>
+                    
+                </a>
+                <span class="file-meta">771 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/agents-team-report.md" class="file-link">
+                    <span class="file-title">Agents Team 分布式协同系统 - 完成报告</span>
+                    
+                </a>
+                <span class="file-meta">341 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/system-health-report.md" class="file-link">
+                    <span class="file-title">系统回溯检测报告</span>
+                    
+                </a>
+                <span class="file-meta">644 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/agents/mycc/oneapi-ha-config.md" class="file-link">
+                    <span class="file-title">One-API 高可用配置方案</span>
+                    
+                </a>
+                <span class="file-meta">714 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/about-me/profile.md" class="file-link">
+                    <span class="file-title">关于用户 (长期记忆)</span>
+                    
+                </a>
+                <span class="file-meta">67 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/0-System/about-me/sjll-lobster.md" class="file-link">
+                    <span class="file-title">SJLL 龙虾连接状态</span>
+                    
+                </a>
+                <span class="file-meta">102 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/.qwen/DASHBOARD.md" class="file-link">
+                    <span class="file-title">Qwen 能力看板</span>
+                    
+                </a>
+                <span class="file-meta">72 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/.qwen/skills/qwq-usage/SKILL.md" class="file-link">
+                    <span class="file-title">qwq-usage — Token 用量统计</span>
+                    
+                </a>
+                <span class="file-meta">146 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/2-Projects/mobile-v3-release.md" class="file-link">
+                    <span class="file-title">项目：Mobile V3 聊天窗口版</span>
+                    
+                </a>
+                <span class="file-meta">85 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/system-architecture.md" class="file-link">
+                    <span class="file-title">AI Team 系统架构资产</span>
+                    
+                </a>
+                <span class="file-meta">352 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/hooks-config.md" class="file-link">
+                    <span class="file-title">Qwen Code Hooks 配置</span>
+                    
+                </a>
+                <span class="file-meta">141 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/git-version-control.md" class="file-link">
+                    <span class="file-title">Git 版本控制指南</span>
+                    
+                </a>
+                <span class="file-meta">316 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/unicom-config/SKILL.md" class="file-link">
+                    <span class="file-title">cc-switch 模型热切换</span>
+                    
+                </a>
+                <span class="file-meta">137 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/unicom-config/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/unicom-config/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/4-Assets/unicom-config/README.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置归档</span>
+                    
+                </a>
+                <span class="file-meta">333 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/tasks/知识库同步与 Agent 互通.md" class="file-link">
+                    <span class="file-title">知识库同步与 Agent 互通</span>
+                    
+                </a>
+                <span class="file-meta">199 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/tasks/cloud-deployment.md" class="file-link">
+                    <span class="file-title">任务：云部署到 Vercel</span>
+                    
+                </a>
+                <span class="file-meta">105 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/tasks/vercel-deployment-ready.md" class="file-link">
+                    <span class="file-title">任务：Vercel 云部署准备就绪</span>
+                    
+                </a>
+                <span class="file-meta">206 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/tasks/v9-development-plan.md" class="file-link">
+                    <span class="file-title">AI Team V9 开发计划</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/PROTOCOL.md" class="file-link">
+                    <span class="file-title">qwq ↔ mycc 共享协议</span>
+                    
+                </a>
+                <span class="file-meta">132 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/WORKFLOW.md" class="file-link">
+                    <span class="file-title">Agent 协同工作流</span>
+                    
+                </a>
+                <span class="file-meta">197 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/DASHBOARD.md" class="file-link">
+                    <span class="file-title">🤖 Agent Network Dashboard</span>
+                    
+                </a>
+                <span class="file-meta">220 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/team-status.md" class="file-link">
+                    <span class="file-title">AI 助理团队状态与任务分配</span>
+                    
+                </a>
+                <span class="file-meta">544 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/shared-tasks/processing/gemini-proxy-status.md" class="file-link">
+                    <span class="file-title">Gemini 代理测试状态</span>
+                    
+                </a>
+                <span class="file-meta">84 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/mobile-web/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile V2 Lite</span>
+                    
+                </a>
+                <span class="file-meta">237 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/mobile-web/v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/mobile-web/v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/mobile-web-v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/mobile-web-v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/agents-team/README.md" class="file-link">
+                    <span class="file-title">Agents Team - 分布式协同系统</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web/knowledge/scripts/FIXES-SUMMARY.md" class="file-link">
+                    <span class="file-title">脚本修复总结</span>
+                    
+                </a>
+                <span class="file-meta">253 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web-v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/mobile-web-v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/agents-team/README.md" class="file-link">
+                    <span class="file-title">Agents Team - 分布式协同系统</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/6-Diaries/README.md" class="file-link">
+                    <span class="file-title">Daily Diary System</span>
+                    
+                </a>
+                <span class="file-meta">375 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/6-Diaries/conversations/conversations-20260307-090453.md" class="file-link">
+                    <span class="file-title">Multi-Agent Conversations</span>
+                    
+                </a>
+                <span class="file-meta">14888 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web/knowledge/scripts/FIXES-SUMMARY.md" class="file-link">
+                    <span class="file-title">脚本修复总结</span>
+                    
+                </a>
+                <span class="file-meta">253 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="mobile-web-v1" class="section">
+            <h2 class="section-title">mobile-web-v1</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/mobile-web-v1/README.md" class="file-link">
+                    <span class="file-title">AI Team Mobile Web Interface</span>
+                    
+                </a>
+                <span class="file-meta">522 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/mobile-web-v1/快速使用指南.md" class="file-link">
+                    <span class="file-title">📱 AI Team Mobile - 快速使用指南</span>
+                    
+                </a>
+                <span class="file-meta">457 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="scripts" class="section">
+            <h2 class="section-title">scripts</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/scripts/FIXES-SUMMARY.md" class="file-link">
+                    <span class="file-title">脚本修复总结</span>
+                    
+                </a>
+                <span class="file-meta">253 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="shared-tasks" class="section">
+            <h2 class="section-title">🤖 协同任务</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/PROTOCOL.md" class="file-link">
+                    <span class="file-title">qwq ↔ mycc 共享协议</span>
+                    
+                </a>
+                <span class="file-meta">132 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/WORKFLOW.md" class="file-link">
+                    <span class="file-title">Agent 协同工作流</span>
+                    
+                </a>
+                <span class="file-meta">197 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/DASHBOARD.md" class="file-link">
+                    <span class="file-title">🤖 Agent Network Dashboard</span>
+                    
+                </a>
+                <span class="file-meta">220 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/unicom-ha-plan.md" class="file-link">
+                    <span class="file-title">联通云 HA 方案 - One-API 高可用配置</span>
+                    
+                </a>
+                <span class="file-meta">764 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/unicom-config-done.md" class="file-link">
+                    <span class="file-title">联通云 HA 配置完成报告</span>
+                    
+                </a>
+                <span class="file-meta">257 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/team-status.md" class="file-link">
+                    <span class="file-title">AI 助理团队状态与任务分配</span>
+                    
+                </a>
+                <span class="file-meta">544 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/shared-tasks/processing/gemini-proxy-status.md" class="file-link">
+                    <span class="file-title">Gemini 代理测试状态</span>
+                    
+                </a>
+                <span class="file-meta">84 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+
+        <section id="tasks" class="section">
+            <h2 class="section-title">📋 任务</h2>
+            <div class="file-list">
+                
+            <div class="file-item">
+                <a href="/kb-files/tasks/知识库同步与 Agent 互通.md" class="file-link">
+                    <span class="file-title">知识库同步与 Agent 互通</span>
+                    
+                </a>
+                <span class="file-meta">199 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/tasks/cloud-deployment.md" class="file-link">
+                    <span class="file-title">任务：云部署到 Vercel</span>
+                    
+                </a>
+                <span class="file-meta">105 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/tasks/vercel-deployment-ready.md" class="file-link">
+                    <span class="file-title">任务：Vercel 云部署准备就绪</span>
+                    
+                </a>
+                <span class="file-meta">206 字</span>
+            </div>
+            
+
+            <div class="file-item">
+                <a href="/kb-files/tasks/v9-development-plan.md" class="file-link">
+                    <span class="file-title">AI Team V9 开发计划</span>
+                    
+                </a>
+                <span class="file-meta">326 字</span>
+            </div>
+            
+            </div>
+        </section>
+        
+        </main>
+    </div>
+    
+    <script>
+        function filterFiles() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            document.querySelectorAll('.file-item').forEach(item => {
+                const title = item.querySelector('.file-title').textContent.toLowerCase();
+                item.style.display = title.includes(query) ? '' : 'none';
+            });
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
