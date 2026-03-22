@@ -1,0 +1,18 @@
+{
+  "id": "task-voice-001",
+  "title": "安装 NoizAI 语音交互 Skill",
+  "description": "在 Surface 龙虾上安装 NoizAI 语音 Skill\n\n安装命令:\nnpx skills add NoizAI/skills --full-depth --skill tts -y\n\n配置:\n1. 获取 Noiz API Key\n2. 在 OpenClaw 中配置\n3. 测试语音输出",
+  "created_at": "2026-03-07T12:20:00+08:00",
+  "updated_at": "2026-03-07T12:35:00+08:00",
+  "status": "processing",
+  "source": "qwq",
+  "target": "sjll",
+  "priority": "P0",
+  "progress": [
+    {"time": "12:20", "event": "任务创建"},
+    {"time": "12:25", "event": "文章读取完成 (mycc read-gzh)"},
+    {"time": "12:30", "event": "安装指南创建"},
+    {"time": "12:35", "event": "SSH 发送指令到 Surface"}
+  ],
+  "next_step": "等待 Surface 用户执行安装命令"
+}

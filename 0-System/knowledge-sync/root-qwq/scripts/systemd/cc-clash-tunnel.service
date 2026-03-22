@@ -1,0 +1,28 @@
+[Unit]
+Description=CC Clash SSH Tunnel
+Documentation=https://github.com/vicki/air/qwq
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/root/cc-clash-tunnel.sh start
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/root/cc-clash-tunnel.sh stop
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cc-clash-tunnel
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+
+# Environment
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target

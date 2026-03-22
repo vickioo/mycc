@@ -34,7 +34,7 @@ import { CloudflareProvider } from "./tunnel-provider.js";
 import { TunnelManager } from "./tunnel-manager.js";
 import { loadPublicUrl, loadEnvFile } from "./env-loader.js";
 
-const PORT = process.env.PORT || 18080;
+const PORT = process.env.PORT || 18082;
 const WORKER_URL = process.env.WORKER_URL || "https://api.mycc.dev";
 const PACKAGE_NAME = "mycc-backend";
 
@@ -632,7 +632,7 @@ ${chalk.yellow("选项:")}
   --reset               重置设备配置，重新生成连接码和配对码
 
 ${chalk.yellow("环境变量:")}
-  PORT                  HTTP 服务端口 (默认: 18080)
+  PORT                  HTTP 服务端口 (默认: 18082)
 
 ${chalk.yellow("示例:")}
   cc-mp start

@@ -21,7 +21,7 @@ import { SessionStats } from "./session-stats.js";
 import { FeishuCommands } from "./channels/feishu-commands.js";
 import { resolveAgentDir, listAgents } from "./agent-resolver.js";
 
-const PORT = process.env.PORT || 18080;
+const PORT = process.env.PORT || 18082;
 
 export interface TlsConfig {
   certPath: string;
@@ -752,7 +752,7 @@ export class HttpServer {
         reject(err);
       });
 
-      const port = Number(process.env.PORT || 18080);
+      const port = Number(process.env.PORT || 18082);
       this.server.listen(port, async () => {
         console.log(`[${this.isTls ? "HTTPS" : "HTTP"}] 服务启动在端口 ${port}`);
 

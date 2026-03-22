@@ -1,0 +1,10 @@
+{
+  "id": "task-001",
+  "title": "测试本地 → CC 服务器任务分发",
+  "description": "验证共享任务目录同步机制",
+  "created_at": "2026-03-05T12:30:00Z",
+  "status": "pending",
+  "source": "qwq-local",
+  "expected_model": "z-ai/glm5",
+  "priority": "normal"
+}

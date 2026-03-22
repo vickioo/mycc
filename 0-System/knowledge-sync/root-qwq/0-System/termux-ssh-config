@@ -1,0 +1,35 @@
+Host gate
+    HostName 113.57.105.174
+    Port 8822
+    User vicki
+    IdentityFile ~/.ssh/id_ed25519_vi
+    ForwardAgent Yes
+    LocalForward 3390 database.local:13193
+    LocalForward 3391 sj-liuliang.local:3389
+    LocalForward 3394 ECS-C6-2XLARGE-.local:23389
+    LocalForward 3395 dbx.local:3389
+    LocalForward 3396 AmPosERP.local:3389
+    LocalForward 8006 192.168.100.222:8006
+    LocalForward 8045 127.0.0.1:8045
+    LocalForward 8821 sj-liuliang.local:22
+
+Host databasei
+    HostName 113.57.105.174
+    Port 8822
+    User vicki
+    ForwardAgent Yes
+
+Host dbi
+    HostName databasei
+    User whyh
+
+Host CC
+    HostName 192.168.100.228
+    User root
+    IdentityFile ~/.ssh/id_ed25519_vi
+    ProxyJump gate
+
+Host sjll
+    HostName sj-liuliang.local
+    User work
+    ProxyJump gate

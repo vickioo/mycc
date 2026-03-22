@@ -1,0 +1,28 @@
+[Unit]
+Description=CC Clash Tunnel Watchdog
+Documentation=https://github.com/vicki/air/qwq
+After=network-online.target cc-clash-tunnel.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/root/cc-clash-watchdog.sh
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cc-clash-watchdog
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+
+# Environment
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target

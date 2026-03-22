@@ -1,0 +1,16 @@
+{
+  "id": "AIHUB-2026-03-11-001",
+  "title": "AI Hub 多 Agent 协同分析",
+  "description": "拉通所有 AI Agent，分析 AI Hub 项目现状，制定整体迭代计划",
+  "priority": "P0",
+  "status": "in_progress",
+  "created": "2026-03-11T20:25:00Z",
+  "creator": "qwq",
+  "assignees": ["gemini-cc", "claude-cc", "codex-surface", "mycc-surface", "mycc-u22"],
+  "deadline": "2026-03-11T22:30:00Z",
+  "deliverables": [
+    "迭代计划文档",
+    "代码同步方案",
+    "架构优化建议"
+  ]
+}

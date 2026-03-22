@@ -1,0 +1,35 @@
+{
+  "id": "task-config-sync-001",
+  "title": "Gemini API 配置同步到 CC 服务器 AI 集群",
+  "description": "将正确的 Gemini API 配置信息同步到 CC 服务器上的所有 AI 服务\n\n关键信息:\n- GEMINI_API_KEY 以 nvapi- 开头，但这是 Antigravity Tools 网关的 Key\n- 不是 NVIDIA 官方 API Key\n- 通过 Antigravity Proxy (port 8045) 访问",
+  "priority": "high",
+  "status": "completed",
+  "created_at": "2026-03-07T20:40:00Z",
+  "created_by": "qwq",
+  "assigned_to": "mycc",
+  "completed_at": "2026-03-07T20:45:00Z",
+  "tags": ["config", "gemini", "antigravity", "sync"],
+  "config": {
+    "GEMINI_API_KEY": "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",
+    "GOOGLE_GEMINI_BASE_URL": "http://127.0.0.1:8045",
+    "GOOGLE_GEMINI_MODEL": "gemini-3-flash",
+    "ANTIGRAVITY_PORT": 8045
+  },
+  "notes": [
+    "nvapi- 前缀不代表 NVIDIA 官方 API",
+    "这是 Antigravity Tools 网关的认证 Key",
+    "可用于访问 NVIDIA 服务但需要通过 Antigravity"
+  ],
+  "sync_targets": [
+    "~/.gemini/.env (CC 服务器)",
+    "~/.config/gemini-cli/ (本地)",
+    "/root/free-claude-code/.env (本地代理)"
+  ],
+  "steps": [
+    {"step": "记录到 qwq 知识库", "status": "done", "file": "0-System/gemini-api-config.md"},
+    {"step": "同步到 CC 服务器 ~/.gemini/.env", "status": "done", "file": "~/.gemini/API_KEY_NOTE.md"},
+    {"step": "通知 mycc 更新记忆", "status": "done", "via": "API message"},
+    {"step": "创建 CC 服务器记忆文件", "status": "done", "file": "~/.gemini/history/gemini_config_memory.md"},
+    {"step": "更新知识库侧边栏", "status": "done", "file": "mobile-web/knowledge/_sidebar.md"}
+  ]
+}

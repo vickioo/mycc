@@ -1,11 +1,17 @@
 ---
 name: cc-audit
-description: free-claude-code 安全审计。记录每日 token 消耗、超过阈值报警、生成消耗报告。触发词："/cc-audit"、"安全审计"、"token 报警"
+description: Claude Code 安全审计。记录每日 token 消耗、超过阈值报警、生成消耗报告。触发词："/cc-audit"、"安全审计"、"token 报警"
 ---
 
-# cc-audit — free-claude-code 安全审计
+# cc-audit — Claude Code 安全审计
 
-监控 free-claude-code 的 token 消耗，记录日志，超过阈值时报警，并生成消耗报告。
+监控 Claude Code 的 token 消耗，记录日志，超过阈值时报警，并生成消耗报告。
+
+## 重要：当前配置
+
+- **调用链路**：Claude Code → local proxy (localhost:8082) → NVIDIA NIM → MiniMax M2.5
+- **当前模型**：`minimaxai/minimax-m2.5` (via NVIDIA NIM)
+- **免费层**：NVIDIA Developer 免费层
 
 ## 触发词
 

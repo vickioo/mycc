@@ -1,0 +1,15 @@
+{
+  "id": "task-002",
+  "title": "跨 Agent 协同测试",
+  "description": "测试 qwq → sjll 任务路由",
+  "created_at": "2026-03-05T20:57:00Z",
+  "status": "pending",
+  "source": "qwq-local",
+  "target": "sjll-lobster",
+  "expected_model": "cc-oneapi/qwen/qwen3-235b-a22b",
+  "priority": "normal",
+  "action": {
+    "type": "code_review",
+    "path": "/root/air/qwq/shared-tasks/"
+  }
+}

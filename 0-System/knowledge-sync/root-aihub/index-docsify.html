@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Team 知识库</title>
+  <meta name="description" content="AI Team 知识库 - 系统文档、项目记录、思考认知">
+  
+  <!-- Docsify 主题 -->
+  <link rel="stylesheet" href="//fastly.jsdelivr.net/npm/docsify@4/themes/vue.css" />
+  <link rel="stylesheet" href="//fastly.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />
+  
+  <style>
+    /* 自定义样式 */
+    :root {
+      --theme-color: #667eea;
+      --theme-color-dark: #764ba2;
+    }
+    
+    .sidebar {
+      background: linear-gradient(180deg, #f5f7fa 0%, #e4e8ec 100%);
+    }
+    
+    .sidebar-toggle {
+      background: transparent;
+      opacity: 0.8;
+    }
+    
+    .sidebar-toggle:hover {
+      opacity: 1;
+    }
+    
+    .sidebar-toggle-button {
+      background: var(--theme-color);
+    }
+    
+    .markdown-section {
+      max-width: 900px;
+      padding: 40px 20px;
+    }
+    
+    .markdown-section h1 {
+      border-bottom: 2px solid var(--theme-color);
+      padding-bottom: 10px;
+    }
+    
+    .markdown-section a {
+      color: var(--theme-color);
+    }
+    
+    /* 回到顶部按钮优化 */
+    .docsify-back-to-top {
+      background: linear-gradient(135deg, var(--theme-color), var(--theme-color-dark)) !important;
+      opacity: 0.8;
+    }
+    
+    /* 搜索框优化 */
+    .search input {
+      border: 2px solid var(--theme-color);
+      border-radius: 8px;
+    }
+    
+    /* 移动端优化 */
+    @media (max-width: 768px) {
+      .markdown-section {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    window.$docsify = {
+      name: '📚 AI Team KB',
+      repo: '', // 如果有 GitHub 仓库可填写
+      
+      // 侧边栏配置
+      loadSidebar: '_sidebar.md',
+      loadNavbar: '_navbar.md',
+      subMaxLevel: 3, // 最大嵌套层级
+      auto2top: true, // 切换页面后自动回到顶部
+      
+      // 目录折叠
+      sidebarDisplayLevel: 2, // 默认展开层级
+      
+      // 全文搜索
+      search: {
+        maxAge: 86400000, // 缓存 24 小时
+        paths: 'auto',
+        placeholder: '🔍 搜索文档...',
+        noData: '😅 没有找到相关内容',
+        depth: 4
+      },
+      
+      // 分页导航
+      pagination: {
+        previousText: '← 上一篇',
+        nextText: '下一篇 →',
+        crossChapter: true,
+        crossChapterText: true
+      },
+      
+      // 回到顶部
+      backToTop: {
+        scrollThreshold: 300,
+        scrollSmooth: true,
+        scrollSmoothDuration: 600
+      },
+      
+      // 代码块
+      copyCode: {
+        buttonText: '📋 复制',
+        errorText: '❌ 失败',
+        successText: '✅ 已复制'
+      },
+      
+      // 图片缩放
+      mediumZoom: {
+        margin: 16,
+        background: '#fff',
+        scrollOffset: 40
+      },
+      
+      // 页脚
+      footer: {
+        copy: 'AI Team · ',
+        auth: 'vicki',
+        pre: '<hr/>',
+        style: 'font-size: 12px; text-align: center; color: #666;'
+      },
+      
+      // 路由
+      routerMode: 'hash',
+      
+      // 封面
+      coverpage: false,
+      
+      // 执行脚本
+      executeScript: true,
+      
+      // 外部链接
+      externalLinkTarget: '_blank',
+      
+      // 404 页面
+      notFoundPage: true,
+      
+      // 插件
+      plugins: [
+        // 日更提示
+        function(hook, vm) {
+          hook.beforeEach(function(html) {
+            var url = 'https://github.com/' + vm.route.file;
+            var editHtml = '[:memo: 编辑此页](' + url + ')\n\n';
+            return editHtml + html;
+          });
+          
+          // 添加更新时间
+          hook.afterEach(function(html) {
+            var now = new Date();
+            var dateStr = now.toLocaleDateString('zh-CN');
+            return html + '<br/><br/><div style="font-size:12px;color:#999">最后更新：' + dateStr + '</div>';
+          });
+        }
+      ]
+    }
+  </script>
+  
+  <!-- Docsify 核心 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- 插件 -->
+  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//fastly.jsdelivr.net/npm/docsify-sidebar-collapse"></script>
+  <script src="//fastly.jsdelivr.net/npm/docsify-back-to-top"></script>
+  <script src="//fastly.jsdelivr.net/npm/docsify-footer-min"></script>
+  
+  <!-- 语法高亮 -->
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//fastly.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-03-07T08:42:59.854650",
+  "total": 5,
+  "success": 4,
+  "success_rate": 80.0,
+  "avg_elapsed_ms": 285.5,
+  "results": [
+    {
+      "name": "本地命令",
+      "target": "local",
+      "success": true,
+      "elapsed_ms": 2,
+      "output": "local test\n"
+    },
+    {
+      "name": "CC 服务器",
+      "target": "cc",
+      "success": true,
+      "elapsed_ms": 949,
+      "output": " 00:42:59 up 25 days, 15:42,  9 users,  load average: 0.40, 0.48, 0.44\n"
+    },
+    {
+      "name": "Termux",
+      "target": "termux",
+      "success": true,
+      "elapsed_ms": 182,
+      "output": "termux test\n"
+    },
+    {
+      "name": "CC 文件列表",
+      "target": "cc",
+      "success": false,
+      "elapsed_ms": 895,
+      "output": "ls: cannot access '/root/air': No such file or directory\n"
+    },
+    {
+      "name": "本地时间",
+      "target": "local",
+      "success": true,
+      "elapsed_ms": 9,
+      "output": "Sat Mar  7 08:42:59 HKT 2026\n"
+    }
+  ]
+}

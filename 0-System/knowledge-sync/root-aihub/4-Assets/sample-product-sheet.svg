@@ -1,0 +1,56 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="240" y1="80" x2="1680" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F1E8"/>
+      <stop offset="1" stop-color="#E6D8C3"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="1100" y1="180" x2="1520" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#27231E"/>
+      <stop offset="1" stop-color="#655446"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFDF9"/>
+      <stop offset="1" stop-color="#F2E9DD"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#6A5846" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <circle cx="1600" cy="170" r="220" fill="#EFE4D3" opacity="0.9"/>
+  <circle cx="300" cy="970" r="300" fill="#EADBC6" opacity="0.8"/>
+  <rect x="80" y="80" width="1760" height="920" rx="40" fill="#FFFFFF" fill-opacity="0.28"/>
+  <text x="140" y="168" fill="#7E6754" font-family="Georgia, Times New Roman, serif" font-size="28" letter-spacing="8">AUREA</text>
+  <text x="140" y="286" fill="#221D18" font-family="Georgia, Times New Roman, serif" font-size="96" font-weight="700">Smart Bottle Pro</text>
+  <text x="140" y="354" fill="#5A4B3E" font-family="Arial, Helvetica, sans-serif" font-size="36">Hydration tracking with a premium insulated design.</text>
+  <rect x="140" y="414" width="240" height="62" rx="31" fill="#231E19"/>
+  <text x="185" y="454" fill="#F7F0E8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">NEW ARRIVAL</text>
+  <g filter="url(#shadow)">
+    <rect x="1110" y="160" width="520" height="700" rx="60" fill="url(#accent)"/>
+    <rect x="1278" y="248" width="170" height="510" rx="85" fill="#E9DED0"/>
+    <rect x="1296" y="276" width="134" height="438" rx="67" fill="#FBF7F1"/>
+    <rect x="1318" y="214" width="90" height="70" rx="28" fill="#E9DED0"/>
+    <rect x="1340" y="420" width="46" height="150" rx="23" fill="#D7C8B5"/>
+    <circle cx="1363" cy="385" r="14" fill="#C7B39B"/>
+    <rect x="1190" y="740" width="360" height="56" rx="28" fill="#F6EBDD" fill-opacity="0.16"/>
+    <text x="1250" y="777" fill="#F8F1E9" font-family="Arial, Helvetica, sans-serif" font-size="28">24H Cold  12H Warm</text>
+  </g>
+  <rect x="140" y="560" width="400" height="180" rx="28" fill="url(#card)"/>
+  <text x="178" y="620" fill="#251F1A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Smart Temperature Display</text>
+  <text x="178" y="670" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">Tap the lid to view live liquid temperature</text>
+  <text x="178" y="710" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">before every sip.</text>
+  <rect x="570" y="560" width="400" height="180" rx="28" fill="url(#card)"/>
+  <text x="608" y="620" fill="#251F1A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Long-Lasting Insulation</text>
+  <text x="608" y="670" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">Double-wall stainless steel keeps drinks</text>
+  <text x="608" y="710" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">cold all day and warm for hours.</text>
+  <rect x="140" y="770" width="400" height="180" rx="28" fill="url(#card)"/>
+  <text x="178" y="830" fill="#251F1A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Hydration Reminders</text>
+  <text x="178" y="880" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">Sync with your phone for personalized</text>
+  <text x="178" y="920" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">drinking goals and reminders.</text>
+  <rect x="570" y="770" width="400" height="180" rx="28" fill="url(#card)"/>
+  <text x="608" y="830" fill="#251F1A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Clean Minimal Design</text>
+  <text x="608" y="880" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">Lightweight body, matte finish, and a</text>
+  <text x="608" y="920" fill="#5F5145" font-family="Arial, Helvetica, sans-serif" font-size="26">premium silhouette for daily carry.</text>
+  <text x="1110" y="910" fill="#322921" font-family="Arial, Helvetica, sans-serif" font-size="26">www.aurealiving.example</text>
+  <text x="1110" y="950" fill="#6A5847" font-family="Arial, Helvetica, sans-serif" font-size="24">Sample layout. Replace text, colors, and product image as needed.</text>
+</svg>
