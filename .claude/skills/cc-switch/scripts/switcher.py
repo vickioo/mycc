@@ -36,6 +36,48 @@ MODELS = {
             "apiKey": "antigravity-admin-2026",
             "platform": "custom"
         },
+        # 联通云 - Plan-Lite 套餐 (优先)
+        "unicom-glm5": {
+            "name": "GLM5 (联通云)",
+            "model": "glm-5",
+            "endpoint": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+            "description": "联通云 - 智谱 GLM5，Plan-Lite 套餐优先",
+            "stability": "稳定",
+            "estimated_uptime": "至2026-04-04",
+            "apiKey": "sk-1pC3T7x9LvHmZrFNgE8K6QwPqDSj2BdYuW5ZoX4AyC0ZlV7k",
+            "platform": "unicom"
+        },
+        "unicom-qwen3-397b": {
+            "name": "Qwen3.5 397B (联通云)",
+            "model": "Qwen3.5-397B-A17B",
+            "endpoint": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+            "description": "联通云 - 阿里 Qwen3.5 397B MoE",
+            "stability": "稳定",
+            "estimated_uptime": "至2026-04-04",
+            "apiKey": "sk-1pC3T7x9LvHmZrFNgE8K6QwPqDSj2BdYuW5ZoX4AyC0ZlV7k",
+            "platform": "unicom"
+        },
+        "unicom-minimax": {
+            "name": "MiniMax M2.5 (联通云)",
+            "model": "MiniMax-M2.5",
+            "endpoint": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+            "description": "联通云 - MiniMax M2.5 Pro",
+            "stability": "稳定",
+            "estimated_uptime": "至2026-04-04",
+            "apiKey": "sk-1pC3T7x9LvHmZrFNgE8K6QwPqDSj2BdYuW5ZoX4AyC0ZlV7k",
+            "platform": "unicom"
+        },
+        # 联通云 - 免费额度 (备用)
+        "unicom-free-glm5": {
+            "name": "GLM5 (联通云免费)",
+            "model": "glm-5",
+            "endpoint": "https://aigw-gzgy2.cucloud.cn:8443/v1",
+            "description": "联通云 - 免费额度备用",
+            "stability": "稳定",
+            "estimated_uptime": "长期",
+            "apiKey": "sk-rPgmo2UrLU6DmUp16AhhbTGlgWjgAbBA",
+            "platform": "unicom-free"
+        },
         "minimax": {
             "name": "Minimax M2.1",
             "model": "minimaxai/minimax-m2.1",

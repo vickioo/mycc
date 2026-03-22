@@ -1,30 +1,18 @@
 {
-  "name": "cc-miniprogram",
-  "version": "0.5.2",
+  "name": "mycc-backend",
+  "version": "1.0.0",
+  "description": "MyCC 小程序后端服务",
   "type": "module",
-  "description": "Claude Code 微信小程序本地后端",
-  "main": "dist/index.js",
-  "bin": {
-    "cc-mp": "dist/index.js"
-  },
+  "main": "src/index.ts",
   "scripts": {
-    "build": "npx tsc",
-    "dev": "npx tsx src/index.ts",
-    "start": "node dist/index.js",
-    "postinstall": "node scripts/patch-sdk.mjs",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "start": "tsx src/index.ts start",
+    "dev": "tsx src/index.ts start",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest --coverage"
   },
-  "keywords": [
-    "claude",
-    "claude-code",
-    "miniprogram",
-    "wechat"
-  ],
-  "author": "aster",
-  "license": "MIT",
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.2.63",
+    "@anthropic-ai/claude-code": "^2.1.72",
     "@larksuiteoapi/node-sdk": "^1.59.0",
     "chalk": "^4.1.2",
     "nanoid": "^5.0.0",

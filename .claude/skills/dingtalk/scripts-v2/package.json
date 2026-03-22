@@ -1,0 +1,6 @@
+{
+  "name": "dingtalk-bot-v2",
+  "version": "2.0.0",
+  "type": "module",
+  "main": "bot-v2.js"
+}

@@ -1,0 +1,35 @@
+{
+  "clientId": "dingfjgkhdeotyo9dmiu",
+  "clientSecret": "5CRNqGE5isA3MiTMhnw1lALh_LjZmnn-Q7nYor3vFxCHXji_JqlQXhA2DhpI-jyp",
+  "agentId": "1656913351",
+  "appId": "7cbbb4d0-20f8-41c8-afde-cce9f16ad7e7",
+
+  "admins": ["1626074212671638"],
+  "projectPath": "/data/mycc",
+
+  "model": "claude-sonnet-4-6",
+  "maxTokens": 4096,
+
+  "safeMode": {
+    "allowedTools": ["Read", "Grep", "Glob"],
+    "disallowedTools": ["Bash", "Write", "Edit", "WebFetch"],
+    "blockedPatterns": [
+      "ignore previous",
+      "forget your",
+      "you are now",
+      "act as",
+      "/etc/",
+      "/root/",
+      "sk-",
+      "password"
+    ]
+  },
+
+  "webhooks": {
+    "primary": {
+      "name": "煜韩-培训群",
+      "url": "https://oapi.dingtalk.com/robot/send?access_token=dfd9e7137762c6f5a545d51eb1a09a79efeb2739c41fa6182cbe9d7280231271",
+      "secret": "SEC5e6c1a8483c42eff8878bf4f94ae5db4b18c1c7e599bb74b414e658000f3fed9"
+    }
+  }
+}
