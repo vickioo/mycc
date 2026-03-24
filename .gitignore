@@ -127,13 +127,13 @@ package-lock.json
 # 截图残留（桌面操控临时文件）
 200,180
 220,420
-# 备份文件
-.env-loader.ts.bak
-**/*.bak
 # src/ 目录（仅项目根目录的，空目录占位用）
 /src/
-# 但 mycc backend src 源码要保留
+# 但 mycc backend src 源码要保留（必须在 **/*.bak 之前）
 !.claude/skills/mycc/scripts/src/
+# 备份文件（排除上面已保留的路径）
+.env-loader.ts.bak
+**/*.bak
 # 定时任务锁
 .claude/scheduled_tasks.lock
 
@@ -142,9 +142,10 @@ package-lock.json
 0-System/about-me/
 # mycc skill 内部的 CC session 目录
 .claude/skills/mycc/.claude/
-# 个人沉淀（本地知识库，不纳入版本控制）
-4-Assets/
-# 任务追踪文件
-tasks/
+# 个人沉淀（显式忽略不需要的子目录，保留其余）
+4-Assets/踩坑/
+4-Assets/资产/
+# 任务追踪文件（仅根目录）
+/tasks/
 
 # PM2 运行时配置（ecosystem-mycc.config.cjs 由 git 管理）
