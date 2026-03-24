@@ -39,7 +39,8 @@
 
 ### ACP 协议
 - 接入点: `agentid.pub`
-- 1052Bot ACP: 已配置但未启用
+- **1052Bot AID**: `1052bot.agentid.pub` ✅ 已启用
+- Vicki (我): 待配置
 
 ---
 
