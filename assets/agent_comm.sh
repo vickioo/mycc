@@ -17,18 +17,25 @@ send_to_1052bot() {
     log "发送消息到 1052Bot: ${message:0:50}..."
 
     result=$(powershell.exe -c "
+        \$msg = [System.Security.SecurityElement]::Escape('$message')
         \$body = @{
-            message = '$message'
+            message = \$msg
             receive_id = 'oc_bfec000013f21b6e810166f00533f18f'
         } | ConvertTo-Json
 
         try {
             \$resp = Invoke-RestMethod -Uri 'http://localhost:10053/api/feishu/send' -Method POST -Body \$body -ContentType 'application/json' -UseBasicParsing
-            \$resp | ConvertTo-Json
+            if (\$resp.success -eq 'True' -or \$resp.success -eq \$true) { Write-Output 'success' } else { Write-Output 'failed' }
         } catch {
-            Write-Output '{\"success\": false}'
+            Write-Output 'error'
         }
     " 2>/dev/null)
+
+    if echo "$result" | grep -q "success"; then
+        log "✓ 消息发送成功"
+    else
+        log "✗ 消息发送失败: $result"
+    fi
 
     echo "$result" | grep -q '"success":true' && log "✓ 消息发送成功" || log "✗ 消息发送失败"
 }
