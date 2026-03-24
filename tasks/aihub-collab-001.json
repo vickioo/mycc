@@ -1,0 +1,15 @@
+{
+  "id": "AIHUB-2026-03-11-001",
+  "title": "AI Hub 多 Agent 协同分析",
+  "description": "拉通所有 AI Agent，分析 AI Hub 项目现状，制定整体迭代计划",
+  "priority": "P0",
+  "status": "in_progress",
+  "created": "2026-03-11T20:25:00Z",
+  "creator": "qwq",
+  "assignees": ["codex-surface", "mycc-surface"],
+  "deadline": "2026-03-11T22:30:00Z",
+  "tasks": {
+    "codex-surface": ["代码质量分析", "技术债务识别", "重构建议"],
+    "mycc-surface": ["WSL 集成分析", "Surface 特定技能"]
+  }
+}
