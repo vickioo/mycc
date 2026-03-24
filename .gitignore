@@ -120,3 +120,31 @@ update-cmd-gitbash.ps1
 ieee.png
 ieee_results.html
 package-lock.json
+
+# ====================================
+# 本地扩展（vicki 私有）
+# ====================================
+# 截图残留（桌面操控临时文件）
+200,180
+220,420
+# 备份文件
+.env-loader.ts.bak
+**/*.bak
+# src/ 目录（仅项目根目录的，空目录占位用）
+/src/
+# 但 mycc backend src 源码要保留
+!.claude/skills/mycc/scripts/src/
+# 定时任务锁
+.claude/scheduled_tasks.lock
+
+# 个人隐私文件（vicki 私有）
+0-System/MEMORY.md
+0-System/about-me/
+# mycc skill 内部的 CC session 目录
+.claude/skills/mycc/.claude/
+# 个人沉淀（本地知识库，不纳入版本控制）
+4-Assets/
+# 任务追踪文件
+tasks/
+
+# PM2 运行时配置（ecosystem-mycc.config.cjs 由 git 管理）

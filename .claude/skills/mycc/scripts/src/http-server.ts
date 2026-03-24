@@ -6,8 +6,9 @@
 import http from "http";
 import https from "https";
 import os from "os";
-import { join } from "path";
-import { readFileSync, existsSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { generateToken } from "./utils.js";
 import { adapter } from "./adapters/index.js";
 import type { PairState } from "./types.js";
@@ -16,7 +17,8 @@ import { renameSession, getHistoryDir, scanSessionFiles } from "./history.js";
 import { listSkills } from "./skills.js";
 import { ChannelManager } from "./channels/manager.js";
 import { WebChannel } from "./channels/web.js";
-import { loadConfig } from "./config.js";
+import { WechatChannel } from "./channels/wechat.js";
+import { loadConfig, getConfigDir } from "./config.js";
 import { SessionStats } from "./session-stats.js";
 import { FeishuCommands } from "./channels/feishu-commands.js";
 import { resolveAgentDir, listAgents } from "./agent-resolver.js";
@@ -141,6 +143,38 @@ export class HttpServer {
     return this.state.token;
   }
 
+  /**
+   * 立即将 authToken 持久化到 current.json（同步写盘，不依赖回调）
+   * 配对成功后立即调用，确保即使进程崩溃也不会丢 authToken
+   *
+   * 使用 __dirname 固定路径，避免 cwd 动态检测出错。
+   * __dirname 在运行时始终指向 src/ 的父目录（scripts/）。
+   */
+  persistPairToken(token: string): void {
+    try {
+      // 使用与 loadConfig 一致的配置目录路径
+      const configDir = getConfigDir(this.cwd);
+      const infoPath = join(configDir, "current.json");
+
+      // 读取现有配置，合并 authToken
+      let data: Record<string, unknown> = {};
+      if (existsSync(infoPath)) {
+        try {
+          data = JSON.parse(readFileSync(infoPath, "utf-8"));
+        } catch {
+          // 文件损坏时忽略，从头构建
+        }
+      }
+
+      data.authToken = token;
+      mkdirSync(configDir, { recursive: true });
+      writeFileSync(infoPath, JSON.stringify(data, null, 2));
+      console.log(`[Pair] authToken 已持久化到 ${infoPath}`);
+    } catch (err) {
+      console.error("[Pair] 持久化 authToken 失败:", err);
+    }
+  }
+
   private async handleRequest(req: http.IncomingMessage, res: http.ServerResponse) {
     // CORS
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -250,7 +284,10 @@ export class HttpServer {
 
     console.log("[Pair] 首次配对成功");
 
-    // 通知外部保存 authToken
+    // 同步写盘：立即持久化 authToken，不依赖回调
+    this.persistPairToken(token);
+
+    // 通知外部（兼容旧的回调机制）
     if (this.onPaired) {
       this.onPaired(token);
     }
@@ -337,11 +374,18 @@ export class HttpServer {
       "Connection": "keep-alive",
     });
 
-    // 创建 Web 通道
-    const webChannel = new WebChannel({ res });
-    const webChannelId = `web-${Date.now()}-${Math.random()}`;
-    Object.defineProperty(webChannel, 'id', { value: webChannelId, writable: false });
-    this.channelManager.register(webChannel);
+    // 检测微信客户端：User-Agent 含 MicroMessenger
+    const ua = req.headers['user-agent'] || '';
+    const isWechat = ua.includes('MicroMessenger');
+    const enableWechatConvert = process.env.WECHAT_MARKDOWN_CONVERT !== 'false';
+    const useWechatChannel = isWechat && enableWechatConvert;
+
+    const ChannelClass = useWechatChannel ? WechatChannel : WebChannel;
+    const channelName = useWechatChannel ? 'wechat' : 'web';
+    const channelInstance = new ChannelClass({ res });
+    const channelId = `${channelName}-${Date.now()}-${Math.random()}`;
+    Object.defineProperty(channelInstance, 'id', { value: channelId, writable: false });
+    this.channelManager.register(channelInstance);
 
     let currentSessionId = sessionId;
 
@@ -354,13 +398,13 @@ export class HttpServer {
 
     try {
       // 使用 adapter 的 chat 方法（返回 AsyncIterable）
-      for await (const data of adapter.chat({ message: chatMessage, sessionId, cwd: effectiveCwd, images, model: model || undefined, settingSources })) {
+      for await (const data of adapter.chat({ message: chatMessage, sessionId, cwd: effectiveCwd, images, model: model || undefined })) {
         if (data && typeof data === "object" && "type" in data) {
           // 提取 session_id
           if (data.type === "system" && "session_id" in data) {
             currentSessionId = data.session_id as string;
             this.feishuCommands.currentSessionId = currentSessionId;
-            webChannel.setSessionId(currentSessionId);
+            channelInstance.setSessionId(currentSessionId);
           }
 
           // 拦截 tool_use 事件 → 广播 + 统计
@@ -392,7 +436,7 @@ export class HttpServer {
         }
 
         // 发送到 Web 通道（不广播到飞书，飞书走自己的流程）
-        await webChannel.send(data);
+        await channelInstance.send(data);
       }
 
       // user 消息也算一条
@@ -400,8 +444,8 @@ export class HttpServer {
 
       // 完成
       clearInterval(chatHeartbeatInterval);
-      await webChannel.sendDone();
-      this.channelManager.unregister(webChannelId);
+      await channelInstance.sendDone();
+      this.channelManager.unregister(channelId);
       console.log(`[CC] 完成`);
     } catch (error) {
       clearInterval(chatHeartbeatInterval);
@@ -414,11 +458,11 @@ export class HttpServer {
       }
 
       try {
-        await webChannel.sendError(errMsg);
+        await channelInstance.sendError(errMsg);
       } catch {
         // 忽略发送错误
       }
-      this.channelManager.unregister(webChannelId);
+      this.channelManager.unregister(channelId);
       console.error(`[CC] 错误: ${errMsg}`);
     }
   }

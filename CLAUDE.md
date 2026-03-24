@@ -114,15 +114,126 @@ cc 通过三层记忆来记住你。
 
 ## 关于你的偏好
 
-<!-- 例如：喜欢表格对比、偏好简洁回答、不喜欢复杂术语等 -->
-
-- （待学习）
+- 喜欢简洁直接的回复，不废话
+- 喜欢"先沉淀，再前进"——归档整理优先于继续扩张
+- 喜欢用 emoji 风格展示信息（已落地：微信渲染适配）
+- 喜欢表格对比格式
+- 接受 cc 主动发起行动（不等确认再动手）
+- 对截图/可视化展示感兴趣（桌面操控已验证可用）
+- 连发消息没问题，可以一次发多条测试
 
 ## 关于 cc 的介入方式
 
-<!-- 记录哪些介入方式有效，哪些你不喜欢 -->
+- 多进程/多源任务 → 接受用 agent/team 并行跑
+- 系统排查 → 接受一次性跑多条诊断命令
+- 归档整理 → 接受自动完成，不需逐条确认
+- 危险操作（删文件、强制推送等）→ 必须先确认
 
-- （待学习）
+---
+
+# 系统知识库（沉淀）
+
+> 重要踩坑记录，供后续参考。
+
+## Python elif "悬空"语法错误
+
+**文件**：`/home/vicki/aihub/free-claude-code/api/routes.py`
+**症状**：PM2 crash loop，SyntaxError 指向 elif 但实际是内层 if 缺少 else
+
+```python
+# ❌ 错误：内层 if 没有 else，后续 elif 被 Python 视为孤立
+elif provider_type == "nvidia_nim":
+    if "opus" in requested_model:
+        model = "..."
+# 下一行 elif 报错：invalid syntax
+elif provider_type == "minimax":
+
+# ✅ 修复：内层 if 必须有 else
+elif provider_type == "nvidia_nim":
+    if "opus" in requested_model:
+        model = "..."
+    else:
+        model = "..."
+elif provider_type == "minimax":
+```
+
+**经验**：写嵌套 if/elif 时，每次写完内层 if 后确认是否有 else。
+
+## 已验证设备（2026-03-23）
+
+| 设备 | 地址 | 方式 | 状态 |
+|------|------|------|------|
+| Xiaomi 15 (Mi15) Android | 192.168.3.74:8022 | SSH via Termux | ✅ 已通，uptime 5天23小时 |
+| Victory Win11 | 192.168.1.3 | RDP/SSH | ✅ Remmina 配置文件已存 |
+| SJ-Liuliang | sj-liuliang.local | RDP | ✅ Remmina 配置文件已存 |
+| Mi15 截图 | — | ADB WiFi | ⚠️ 需在手机上开启开发者选项 ADB |
+
+> Mi15 截图方法：需先在手机上开启"无线调试"（开发者选项），然后从本机 `/tmp/platform-tools/adb connect 192.168.3.74:5555` 连接。刷屏：scrcpy 或 adb exec-out screencap。
+
+---
+
+## Provider 链路现状（2026-03-23）
+
+| Provider | 状态 | 说明 |
+|----------|------|------|
+| nvidia_nim | ✅ 主用 | 实际 chat 接口正常 |
+| open_router | ✅ 备援 | HTTP 200 |
+| silicon_flow | ❌ 停用     | 已移出巡检 |
+| minimax | ⚠️ 待确认 | 余额接口 404 |
+| atomgit | ❌ 停用 | 全部 404 |
+| scnet | ❌ 停用 | SSL 错误 |
+
+## 微信消息限流（2026-03-24）
+
+**文件**：`/home/vicki/.npm-global/lib/node_modules/@aster110/cc2wechat/dist/wechat-api.js`
+
+**症状**：微信对 bot 账号有消息频率限制，快速发送时从第7条开始返回 `ret=-2`，但 HTTP 状态码始终为 200，reply-cli 原来完全无感知。
+
+**测试数据**（连续发15条，间隔500ms）：
+- 消息 1-6：HTTP 200，ret=none ✅ 成功
+- 消息 7-15：HTTP 200，ret=-2 ❌ 被拒
+
+**已修复**：在 `apiFetch` 的 `return rawText` 之前加 ret code 检查，ret≠0 时抛出带 ret 值的错误。
+现在 reply-cli 会正确报错：`Error: WeChat API error: ret=-2 msg=unknown`
+
+**注意**：限流是服务端行为，窗口时长未测（30秒后恢复）。建议在 CC 服务器上同步打同样的 patch。
+
+## 守护进程
+
+`src/tasks/cc-keepalive.py` — 高可用守护，监控 cc2wechat-daemon / free-claude-code / mihomo，每30秒检查，连续2次失败重启。
+
+```bash
+python3 src/tasks/cc-keepalive.py start|stop|status|check
+```
+
+## 微信消息频率限制（ret=-2）
+
+**文件**：`/home/vicki/.npm-global/lib/node_modules/@aster110/cc2wechat/dist/wechat-api.js`
+
+**现象**：
+- 微信对 bot 消息有静默频率限制
+- HTTP 状态码始终返回 200，但 body 里 `ret=-2` 表示被限流
+- reply-cli 原来没有检查 ret code，会静默失败（`Sent:` 但实际没到）
+- 连续主动推送消息，限制从**第7条左右**开始触发
+
+**实测数据**：
+| 场景 | 发送 | 收到 | ret=-2 触发点 |
+|------|------|------|--------------|
+| 主动推送 11 条 | 11 | 10 | ~第11条 |
+| 主动推送 15 条 | 15 | 6 | 第7条开始 |
+
+**已修复**：在 `apiFetch()` 的 `return rawText` 之前加入 ret 检查，ret≠0 时抛出错误，使 reply-cli 报 `Error: WeChat API error: ret=-2 msg=unknown`。
+
+**注意**：
+- 这是服务端限制，客户端无法绕过
+- 主动推送超过限制会被静默丢弃
+- daemon 的 `-> replied` 回复走同样 API，同样受限
+
+```
+
+## OpenClaw 知识
+
+详见 `4-Assets/知识/OpenClaw知识精华.md` — 吸收了守护进程设计、知识更新流程、文档规范。
 
 ---
 

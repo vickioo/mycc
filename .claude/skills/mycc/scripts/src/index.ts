@@ -9,8 +9,7 @@
  */
 
 import { execSync } from "child_process";
-import { mkdirSync, writeFileSync, existsSync, appendFileSync } from "fs";
-import { homedir } from "os";
+import { mkdirSync, writeFileSync, existsSync, readFileSync, appendFileSync } from "fs";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { join } from "path";
@@ -32,7 +31,7 @@ import { startScheduler, stopScheduler, type Task } from "./scheduler.js";
 import { adapter } from "./adapters/index.js";
 import { CloudflareProvider } from "./tunnel-provider.js";
 import { TunnelManager } from "./tunnel-manager.js";
-import { loadPublicUrl, loadEnvFile } from "./env-loader.js";
+import { loadPublicUrl, loadEnvFile, watchEnvFile } from "./env-loader.js";
 
 const PORT = process.env.PORT || 18080;
 const WORKER_URL = process.env.WORKER_URL || "https://api.mycc.dev";
@@ -195,6 +194,14 @@ async function startServer(args: string[]) {
 
   // 再次加载 .env 文件（使用确定的项目根目录）
   loadEnvFile(cwd);
+
+  // 热重载：监听 .env 变化
+  const stopEnvWatcher = watchEnvFile((changedKeys) => {
+    console.log(chalk.yellow(`[Config] .env 变化，已更新: ${changedKeys.join(", ")}`));
+  }, cwd);
+
+  // 进程退出时清理 watcher
+  process.on("exit", () => stopEnvWatcher());
 
   const server = new HttpServer(pairCode, cwd, authToken, tlsConfig);
 
@@ -381,27 +388,23 @@ ${skillLine}
   }
 
   // 保存连接信息到文件（统一保存，包含持久化配置）
-  // 优先级：MYCC_SKILL_DIR 环境变量 > cwd/.claude/skills/mycc > ~/.mycc/
+  // 使用 getConfigDir(cwd) 与 loadConfig 保持一致
+  const myccDir = getConfigDir(cwd);
   const saveConnectionInfo = (newAuthToken?: string) => {
-    let myccDir: string;
-
-    const envSkillDir = process.env.MYCC_SKILL_DIR;
-    const cwdSkillDir = join(cwd, ".claude", "skills", "mycc");
-    const homeDir = join(homedir(), ".mycc");
-
-    if (envSkillDir && existsSync(envSkillDir)) {
-      myccDir = envSkillDir;
-    } else if (existsSync(join(cwd, ".claude", "skills", "mycc"))) {
-      myccDir = cwdSkillDir;
-    } else {
-      myccDir = homeDir;
-    }
-
     const infoPath = join(myccDir, "current.json");
     try {
       mkdirSync(myccDir, { recursive: true });
-      // 获取当前 authToken（优先用新传入的，否则用服务器当前的）
-      const currentAuthToken = newAuthToken || server.getAuthToken() || authToken;
+      // 读取现有配置，保留 authToken（只在有新 token 时覆盖）
+      let existingData: Record<string, unknown> = {};
+      if (existsSync(infoPath)) {
+        try {
+          existingData = JSON.parse(readFileSync(infoPath, "utf-8"));
+        } catch {
+          // 忽略
+        }
+      }
+      // 获取当前 authToken（优先用新传入的，否则用服务器当前的，保留现有值）
+      const currentAuthToken = newAuthToken || server.getAuthToken() || authToken || existingData.authToken as string | undefined;
       writeFileSync(
         infoPath,
         JSON.stringify({

@@ -8,3 +8,4 @@ export { FeishuChannel } from "./feishu.js";
 export { WebChannel } from "./web.js";
 export type { FeishuChannelConfig } from "./feishu.js";
 export type { WebChannelConfig } from "./web.js";
+export { WechatChannel } from './wechat.js';
