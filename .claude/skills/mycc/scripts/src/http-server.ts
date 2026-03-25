@@ -800,6 +800,11 @@ export class HttpServer {
       this.server.listen(port, async () => {
         console.log(`[${this.isTls ? "HTTPS" : "HTTP"}] 服务启动在端口 ${port}`);
 
+        // 调试：打印飞书配置
+        console.log("[DEBUG] CHANNEL_FEISHU:", process.env.CHANNEL_FEISHU);
+        console.log("[DEBUG] FEISHU_APP_ID:", process.env.FEISHU_APP_ID ? "已配置" : "未配置");
+        console.log("[DEBUG] FEISHU_APP_SECRET:", process.env.FEISHU_APP_SECRET ? "已配置" : "未配置");
+
         // 动态加载并注册飞书通道（如果配置了环境变量）
         if (process.env.CHANNEL_FEISHU !== "false" && process.env.FEISHU_APP_ID && process.env.FEISHU_APP_SECRET) {
           try {

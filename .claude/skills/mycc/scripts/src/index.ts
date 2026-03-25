@@ -104,7 +104,7 @@ async function startServer(args: string[]) {
 
   // 第一次加载 .env 文件（搜索可能的位置）
   // 注意：此时可能还不知道项目根目录，所以搜索多个位置
-  loadEnvFile(process.cwd(), scriptsDir);
+  loadEnvFile(false, process.cwd(), scriptsDir, dirname(scriptsDir));
 
   // 检测公网模式（读取 .env 中的 PUBLIC_URL）
   const publicUrl = loadPublicUrl(process.cwd(), scriptsDir);
@@ -193,7 +193,7 @@ async function startServer(args: string[]) {
   }
 
   // 再次加载 .env 文件（使用确定的项目根目录）
-  loadEnvFile(cwd);
+  loadEnvFile(false, cwd);
 
   // 热重载：监听 .env 变化
   const stopEnvWatcher = watchEnvFile((changedKeys) => {
